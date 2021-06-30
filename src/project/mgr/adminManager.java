@@ -1,5 +1,5 @@
 package project.mgr;
 
-public class adminManager {
+public class AdminManager {
 
 }

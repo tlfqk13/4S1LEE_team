@@ -1,5 +1,5 @@
 package project.mgr;
 
-public class hotelManager {
+public class HotelManager {
 
 }

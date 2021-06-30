@@ -7,8 +7,6 @@
 
 	<!-- Java Class에 대한 alias 지정 -->
 	<typeAliases>
-		<typeAlias type="shop.vo.Product" alias="product" />
-		<typeAlias type="shop.vo.Sales" alias="sales" />
 	</typeAliases>
 	
 	<!-- DB접속 정보 셋팅 -->
@@ -26,8 +24,6 @@
 	
 	<!-- Mapper 파일 include -->
 	<mappers>
-		<mapper resource="productMapper.xml" />
-		<mapper resource="salesMapper.xml" />
 	</mappers>
 	
 </configuration>

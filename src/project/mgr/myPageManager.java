@@ -1,5 +1,5 @@
 package project.mgr;
 
-public class myPageManager {
+public class MyPageManager {
 
 }
