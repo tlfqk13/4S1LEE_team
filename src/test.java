@@ -1,15 +1,15 @@
 
 public class test {
-		//test �엯�땲�떎
-		//testst//test �엯�땲�떎
-	//testst//test �엯�땲�떎
-	//testst//test �엯�땲�떎
-	//testst//test �엯�땲�떎
+		//test 占쎌뿯占쎈빍占쎈뼄
+		//testst//test 占쎌뿯占쎈빍占쎈뼄
+	//testst//test 占쎌뿯占쎈빍占쎈뼄
+	//testst//test 占쎌뿯占쎈빍占쎈뼄
+	//testst//test 占쎌뿯占쎈빍占쎈뼄
 	//testst
 	//tetet
 	
-	// �닔�젙�븷寃뚯슂
+	// 占쎈땾占쎌젟占쎈막野껊슣�뒄
 	
 	//test test
-	
+	// 번역 금지
 }
