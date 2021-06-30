@@ -1,13 +1,15 @@
 
 public class test {
-		//test 입니다
-		//testst//test 입니다
-	//testst//test 입니다
-	//testst//test 입니다
-	//testst//test 입니다
+		//test �엯�땲�떎
+		//testst//test �엯�땲�떎
+	//testst//test �엯�땲�떎
+	//testst//test �엯�땲�떎
+	//testst//test �엯�땲�떎
 	//testst
 	//tetet
 	
-	// 수정할게요
+	// �닔�젙�븷寃뚯슂
+	
+	//test test
 	
 }
