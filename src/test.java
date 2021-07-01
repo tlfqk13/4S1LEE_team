@@ -8,7 +8,12 @@ public class test {
 	//testst
 	//tetet
 	
+<<<<<<< HEAD
 	// 占쎈땾占쎌젟占쎈막野껊슣�뒄
+=======
+	// 수정할게요
+	// 승경 수정//
+>>>>>>> refs/heads/master
 	
 	//test test
 	// 번역 금지
