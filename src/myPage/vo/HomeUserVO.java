@@ -1,7 +1,6 @@
 package myPage.vo;
 
-public class UserVO {
-	private int userNumber;
+public class HomeUserVO {
 	private String userID;
 	private String userPassword;
 	private String userEmail;
@@ -10,17 +9,10 @@ public class UserVO {
 	private String userBirth;
 	private String userGrade;
 	
-	public UserVO() {
+	public HomeUserVO() {
 		
 	}
 
-	public int getUserNumber() {
-		return userNumber;
-	}
-
-	public void setUserNumber(int userNumber) {
-		this.userNumber = userNumber;
-	}
 
 	public String getUserID() {
 		return userID;
@@ -80,7 +72,7 @@ public class UserVO {
 
 	@Override
 	public String toString() {
-		return "UserVO [userNumber=" + userNumber + ", userID=" + userID + ", userPassword=" + userPassword
+		return "UserVO [userID=" + userID + ", userPassword=" + userPassword
 				+ ", userEmail=" + userEmail + ", userPhone=" + userPhone + ", userName=" + userName + ", userBirth="
 				+ userBirth + ", userGrade=" + userGrade + "]";
 	}

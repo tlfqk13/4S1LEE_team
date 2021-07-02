@@ -7,6 +7,9 @@
 
 	<!-- Java Class에 대한 alias 지정 -->
 	<typeAliases>
+	<typeAlias type="myPage.vo.HomeUserVO" alias="HomeUser"/>
+	<typeAlias type="myPage.vo.MyPageVO" alias="MyPage"/>
+	<typeAlias type="hotel.vo.ReservationVO" alias="Reservation"/>
 	</typeAliases>
 	
 	<!-- DB접속 정보 셋팅 -->
@@ -24,6 +27,7 @@
 	
 	<!-- Mapper 파일 include -->
 	<mappers>
+	<mapper resource="MyPageMapper.xml"/>
 	</mappers>
 	
 </configuration>
