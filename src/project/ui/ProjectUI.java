@@ -3,16 +3,20 @@ package project.ui;
 import java.util.List;
 import java.util.Scanner;
 
+<<<<<<< HEAD
 import hotel.vo.ReservationVO;
 import myPage.vo.MyPageVO;
 import myPage.vo.HomeUserVO;
 import project.mgr.MyPageManager;
+=======
+import myPage.vo.UserVO;
+
 
 //------------------------------------------------------------//
 // 코딩 작성 전에 읽어보기 
 // 유저 로그인이나 관리자 로그인 메서드 자료형이 void로 되어 있는데
-// 리턴이 있게 하려고 했기 때문에 수정하여야 함.
-//..
+// 리턴이 있게 하려고 했기 때문에 수정하여야 함...
+
 
 // 깃허브 자기 브랜치에서 작업하기 
 // 자기 브랜치에서 작업하다가 내가 작업한거 master 브랜치로 merge 하고 싶을때는 
@@ -21,6 +25,7 @@ import project.mgr.MyPageManager;
 
 
 public class ProjectUI {
+
 	public Scanner scannerInput = new Scanner(System.in);
 	MyPageManager myPageManager = new MyPageManager();
 
@@ -28,6 +33,11 @@ public class ProjectUI {
 	ReservationVO reservation = new ReservationVO();
 	MyPageVO mypage = new MyPageVO();
 
+	
+	private Scanner scannerInput = new Scanner(System.in);
+	boolean loginCheck=true;
+	
+	
 
 	public ProjectUI() {
 		boolean run=true;
@@ -60,15 +70,76 @@ public class ProjectUI {
 
 	}
 
+
 	public void signUp() {
 		System.out.println("1 . ID : ");
 		System.out.println("2 . PW : ");
 		System.out.println("3 . 2차 PW :");
 		System.out.println("3 . 전화번호 (본인인증용) :");
 
+	private void signUp() {
+		
+		System.out.println("< 회원 가입> ");
+		
+		String userID,userPassword,userPassword2,userPhone;
+		System.out.println("1 . 사용하실 ID 를 입력해주세요: ");
+		userID=scannerInput.next();
+		
+//		UserVO userVO=dao.getId(userID);
+//		if(userVO!=null) {
+//			System.out.println("이미 사용중인 아이디입니다");
+//		}
+		
+		System.out.println("2 . 사용하실 비밀번호를 입력해주세요 : ");
+		userPassword=scannerInput.next();
+		System.out.println("2 . 비밀번호를 한번 더 입력해주세요 : ");
+		userPassword2=scannerInput.next();
+		
+		if(userPassword.equals(userPassword2)) {
+			System.out.println(" 본인 인증을 위해 휴대폰 번호를 입력해주세요 : ");
+			userPhone=scannerInput.next();
+			System.out.println("가입 완료 되었습니다");
+			return;
+		}
+		else {
+			signUp();
+		}	
+		
+	}
+	
+	private boolean loginCheck() {
+	
+		String userID, userPassword;
+		System.out.println("1 . 아이디 : ");
+		userID=scannerInput.next();
+		
+		// 로그인 확인하는 메서드
+		// 디비에 가서 아이디랑 비번 비교해서 통과되면 넘김 
+		
+//		UserVO userVO = dao.checkID(userID); DB 에서 로그인 검사
+//		if(userVO==null) {
+//			System.out.println("해당 아이디의 회원이 없습니다");
+//			System.out.println("아이디를 확인하고 다시 입력해 주세요");
+//		}
+//		System.out.println("비밀번호 : ");
+//		userPassword=scannerInput.next();
+//		userVO=dao.checkPassword(userPassword);
+//		if(userVO==null) {
+//			System.out.println("비밀번호가 틀렸습니다");
+//			loginCheck=false;
+//		}
+//		else {
+//			loginCheck=true;
+//		}
+		return loginCheck;
+
 	}
 
+
 	public void userLogin() {
+
+	private void userLogin() {
+		
 		System.out.println("1 . 호텔");
 		System.out.println("2 . 레저");
 		System.out.println("3 . 교통");
