@@ -3,13 +3,13 @@ package project.ui;
 import java.util.List;
 import java.util.Scanner;
 
-<<<<<<< HEAD
+
 import hotel.vo.ReservationVO;
 import myPage.vo.MyPageVO;
 import myPage.vo.HomeUserVO;
 import project.mgr.MyPageManager;
-=======
-import myPage.vo.UserVO;
+
+import myPage.vo.HomeUserVO;
 
 
 //------------------------------------------------------------//
@@ -33,8 +33,6 @@ public class ProjectUI {
 	ReservationVO reservation = new ReservationVO();
 	MyPageVO mypage = new MyPageVO();
 
-	
-	private Scanner scannerInput = new Scanner(System.in);
 	boolean loginCheck=true;
 	
 	
@@ -71,11 +69,6 @@ public class ProjectUI {
 	}
 
 
-	public void signUp() {
-		System.out.println("1 . ID : ");
-		System.out.println("2 . PW : ");
-		System.out.println("3 . 2차 PW :");
-		System.out.println("3 . 전화번호 (본인인증용) :");
 
 	private void signUp() {
 		
@@ -136,7 +129,6 @@ public class ProjectUI {
 	}
 
 
-	public void userLogin() {
 
 	private void userLogin() {
 		
