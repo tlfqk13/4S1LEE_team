@@ -14,6 +14,17 @@ public class HomeUserVO {
 	}
 
 
+	public HomeUserVO(String userId, String userPassword, String userPhone, 
+			String userEmail, String userName,String userBirth) {
+		this.userID=userId;
+		this.userPassword=userPassword;
+		this.userPhone=userPhone;
+		this.userEmail=userEmail;
+		this.userName=userName;
+		this.userBirth=userBirth;
+	}
+
+
 	public String getUserID() {
 		return userID;
 	}

@@ -10,6 +10,7 @@
 	<typeAlias type="myPage.vo.HomeUserVO" alias="HomeUser"/>
 	<typeAlias type="myPage.vo.MyPageVO" alias="MyPage"/>
 	<typeAlias type="hotel.vo.ReservationVO" alias="Reservation"/>
+	<typeAlias type="admin.vo.AdminVO" alias="Admin"/>
 	</typeAliases>
 	
 	<!-- DB접속 정보 셋팅 -->
@@ -28,6 +29,8 @@
 	<!-- Mapper 파일 include -->
 	<mappers>
 	<mapper resource="MyPageMapper.xml"/>
+	<mapper resource="signUpMapper.xml"/>
+	<mapper resource="loginMapper.xml"/>
+	<mapper resource="AdminMapper.xml"/>
 	</mappers>
-	
 </configuration>
