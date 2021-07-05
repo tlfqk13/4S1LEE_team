@@ -422,7 +422,7 @@ public class ProjectUI {
 	public void searchAndReservation() {
 		// TODO Auto-generated method stub
 		System.out.println("검색 및 예약");
-		System.out.println("1 . 날짜 (체크인/체크 아웃)");
+		System.out.println("1 . 날    짜 (체크인/체크 아웃)");
 		System.out.println("2 . 인원");
 		System.out.println("3 . 지역");
 	}
