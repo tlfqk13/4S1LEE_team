@@ -488,6 +488,7 @@ public class ProjectUI {
 			
 			int cnt = hotelDAO.insertReservation(hotel1);
 			
+
 			if(cnt > 0) {
 				
 				System.out.println("<결제 수단 선택>");
