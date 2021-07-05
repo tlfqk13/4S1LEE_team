@@ -1,15 +1,20 @@
 package project.ui;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import admin.vo.AdminManager;
 import admin.vo.AdminVO;
 import hotel.dao.loginMapper;
-
+import hotel.vo.HotelEventVO;
+import hotel.vo.HotelInfoGetVO;
+import hotel.vo.HotelInfoPrintVO;
 import hotel.vo.ReservationVO;
 import myPage.vo.MyPageVO;
 import myPage.vo.HomeUserVO;
+import project.mgr.HotelManager;
 import project.mgr.MyPageManager;
 import project.mgr.signUpManager;
 import project.mgr.loginManager;
@@ -36,6 +41,7 @@ public class ProjectUI {
 	AdminManager admingManager=new AdminManager();
 	
 	MyPageManager myPageManager = new MyPageManager();
+	private HotelManager hotelManager = new HotelManager();
 
 	HomeUserVO user = new HomeUserVO();
 	ReservationVO reservation = new ReservationVO();
@@ -401,35 +407,96 @@ public class ProjectUI {
 		// TODO Auto-generated method stub
 		System.out.println("<호텔>");
 		System.out.println("1 . 검색 및 예약");
-		System.out.println("2 . 이벤트");
-		int selectMenu=scannerInput.nextInt();
-		switch(selectMenu) {
+		System.out.println("2 . 진행중인 이벤트");
+		System.out.println("3 . 전체 이벤트");
+		System.out.println("4. discount");
+		int selectMenu = scannerInput.nextInt();
+		switch (selectMenu) {
 		case 1:
 			searchAndReservation();
 			break;
 		case 2:
-			event();
+			ongoingEvent();
+			break;
+		case 3:
+			allEvent();
 			break;
 		case 0:
 			System.out.println("");
 			break;
-		default: 
+		default:
 			break;
 		}
 
 	}
 
-	public void searchAndReservation() {
+	private void searchAndReservation() {
+		String checkInDate, hotelCity;
+		int maxPeople;
+		scannerInput.nextLine();
 		// TODO Auto-generated method stub
 		System.out.println("검색 및 예약");
-		System.out.println("1 . 날    짜 (체크인/체크 아웃)");
-		System.out.println("2 . 인원");
-		System.out.println("3 . 지역");
+
+
+		System.out.println("2 . 지역");
+		hotelCity = scannerInput.nextLine();
+		System.out.println("3 . 예약 인원 수");
+		maxPeople = scannerInput.nextInt();
+
+		HotelInfoGetVO h = new HotelInfoGetVO();
+		h.setHotelCity(hotelCity);
+		h.setMaxPeople(maxPeople);
+
+		ArrayList<HotelInfoPrintVO> list = hotelManager.hotelsearch(h);
+
+		if (list.isEmpty()) {
+			System.out.println("해당 검색결과가 업습니다");
+		} else {
+			System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수");
+			for (HotelInfoPrintVO h1 : list) {
+
+				System.out.println(h1.getHotelName() + "\t" + h1.getHotelGrade() + "\t" + h1.getHotelAddress() + "\t"
+						+ h1.getRoomTypeName()+"\t"+h1.getMaxPeople());
+
+			}
+		}
 	}
 
-	public void event() {
-		System.out.println("이벤트");
+	public void ongoingEvent() {
+		System.out.println("진행중인 이벤트");
+//		LocalDate today = LocalDate.now();
 
+
+//		System.out.println("날짜를 입력하세요");
+		LocalDate localID = LocalDate.now();
+		String today = localID.toString();
+		
+		ArrayList<HotelEventVO> list = hotelManager.ongoingEvent(today);
+
+		if (list.isEmpty()) {
+			System.out.println("진행중인 이벤트가 없습니다");
+		} else {
+			System.out.println("이벤트 제목 \t 이벤트 내용\t 이벤트 시작일\t 이벤트 종료일\t 할인 금액");
+			for (HotelEventVO e : list) {
+				System.out.println(e.getEventTitle() + " \t " + e.getEventContent() + "\t" + e.getStartDate() + "\t"
+						+ e.getEndDate() + "\t" + e.getDiscount());
+			}
+		}
+	}
+	
+	public void allEvent() {
+		System.out.println("전체 이벤트");
+		ArrayList<HotelEventVO> list = hotelManager.printAllEvent();
+		
+		if (list.isEmpty()) {
+			System.out.println("진행중인 이벤트가 없습니다");
+		} else {
+			System.out.println("이벤트 제목 \t 이벤트 내용\t 이벤트 시작일\t 이벤트 종료일\t 할인 금액");
+			for (HotelEventVO e : list) {
+				System.out.println(e.getEventTitle() + " \t " + e.getEventContent() + "\t" + e.getStartDate() + "\t"
+						+ e.getEndDate() + "\t" + e.getDiscount());
+			}
+		}
 	}
 
 	public void printMainMenu() {

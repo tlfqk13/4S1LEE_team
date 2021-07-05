@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 처리 SQL 이 파일은 mapper인터페이스와연결되어야한다 namespace에는 mapper인터페이스의 경로와 이름을 정해준다 -->
+<mapper namespace="hotel.dao.HotelMapper">
+
+
+<!-- 전체 출력 -->
+<select id="hotelsearch" parameterType="hotelInfoGet" resultType="hotelInfoPrint">
+
+select 
+	h.hotelName 
+	,h.hotelAddress
+	,g.hotelGrade
+	,t.roomTypeName
+	,t.maxPeople
+from
+	hotel h, hotelGrade g, RoomType t, Room r
+where
+	h.hotelGradeID=g.hotelgradeID 
+and
+	r.roomTypeID=t.roomTypeID 
+and
+	h.hotelID = r.hotelID 
+and
+	h.hotelCity = #{hotelCity} 
+and
+	t.maxPeople >= #{maxPeople} 
+
+</select>
+
+<select id="ongoingEvent" resultType="HotelEvent" parameterType="String">
+<![CDATA[
+select 
+	eventTitle
+	,eventcontent
+	,startdate
+	,enddate
+	,discount
+from 
+	event
+where
+	startdate <= #{today}
+and 
+	enddate >= #{today}
+]]>
+
+</select>
+
+<select id="printAllEvent" resultType="HotelEvent">
+
+select 
+	eventTitle
+	,eventcontent
+	,startdate
+	,enddate
+	,discount
+from 
+	event
+
+
+</select>
+
+<select id="">
+
+select
+	
+
+</select>
+
+
+
+</mapper>
