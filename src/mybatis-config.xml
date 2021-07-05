@@ -11,6 +11,10 @@
 	<typeAlias type="myPage.vo.MyPageVO" alias="MyPage"/>
 	<typeAlias type="hotel.vo.ReservationVO" alias="Reservation"/>
 	<typeAlias type="admin.vo.AdminVO" alias="Admin"/>
+	<typeAlias type="myPage.vo.SearchHotelNameVO" alias="SearchHotelName"/>
+	<typeAlias type="myPage.vo.ShowRooomTypeVO" alias="ShowRooomType"/>
+	<typeAlias type="myPage.vo.UnBookingRoomVO" alias="UnBookingRoom"/>
+	<typeAlias type="myPage.vo.ReviewBoardVO" alias="ReviewBoard"/>
 	</typeAliases>
 	
 	<!-- DB접속 정보 셋팅 -->

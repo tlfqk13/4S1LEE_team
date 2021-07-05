@@ -2,17 +2,20 @@ package project.ui;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import admin.vo.AdminManager;
 import admin.vo.AdminVO;
-import hotel.dao.loginMapper;
-
 import hotel.vo.ReservationVO;
-import myPage.vo.MyPageVO;
 import myPage.vo.HomeUserVO;
+import myPage.vo.MyPageVO;
+import myPage.vo.ReviewBoardVO;
+import myPage.vo.SearchHotelNameVO;
+import myPage.vo.ShowRooomTypeVO;
+import myPage.vo.UnBookingRoomVO;
 import project.mgr.MyPageManager;
-import project.mgr.signUpManager;
 import project.mgr.loginManager;
+import project.mgr.signUpManager;
 
 
 
@@ -282,8 +285,32 @@ public class ProjectUI {
 	}
 
 	public void deleteAccount() {
-		// TODO Auto-generated method stub
-		System.out.println("회원 탈퇴하기");
+		System.out.println("회원 탈퇴하기"); 
+		
+		boolean check = checkOneByPwd();
+		if(check == false) {
+			System.out.println(" 비밀번호가 틀렸습니다. ");
+			checkOneByPwd();
+		}
+		
+		scannerInput.nextLine();
+		
+		System.out.println(" 아이디를 입력하세요 ");
+		System.out.print(" 아이디 : ");
+		String userID = scannerInput.nextLine();
+		System.out.println(" 비밀번호를 입력하세요 ");
+		System.out.print(" 비밀번호 : ");
+		String userPassword = scannerInput.nextLine();
+		
+		HomeUserVO deleteUser = new HomeUserVO(userID, userPassword,null,null,null,null,null);
+		
+		boolean checked = myPageManager.deleteAccount(deleteUser);
+		
+		if(checked) {
+			System.out.println(" 회원 탈퇴 성공");
+		}else {
+			System.out.println(" 회원 탈퇴 실패");
+		}
 	}
 
 	public void reservationList() {
@@ -301,11 +328,54 @@ public class ProjectUI {
 
 	public void reviewList() {
 		System.out.println("후기 내역");
-
+		List<ReviewBoardVO> list1 = myPageManager.reviewList();
+		
+		if(list1.isEmpty()) {
+			System.out.println("작성된 후기가 없습니다.");
+		}else {
+			for(ReviewBoardVO reviewList : list1) {
+				System.out.println(reviewList);
+			}
+		}
 	}
 
 	public void userInfoUpdate() {
 		System.out.println("개인정보 수정");
+		boolean pwdCheack = checkOneByPwd();
+		if(pwdCheack) {
+			System.out.println(" 비밀번호가 틀렸습니다. ");
+			checkOneByPwd();
+		}
+		
+		scannerInput.nextLine();
+		
+		System.out.println("새로운 정보 입력");
+		System.out.println("변경할 부분만 입력");
+		System.out.print("비밀번호 변경 : ");
+		String userPassword = scannerInput.nextLine();
+		System.out.println("메일은 메일 형식을 준수하세요");
+		System.out.print("메일주소 변경 :");
+		String userEmail = scannerInput.nextLine();
+		System.out.println("전화번호 변경 :");
+		String userPhone = scannerInput.nextLine();
+		
+		//"" <<??
+		boolean mailCheck = Pattern.matches("\\w+@\\w+\\.\\w+(\\.\\w+)?", userEmail) || userEmail.isEmpty();
+		
+		HomeUserVO userInfoUpdate = new HomeUserVO();
+		
+		if(mailCheck) {
+			userInfoUpdate = new HomeUserVO(null,userPassword, userEmail, userPhone,null,null,null);
+		} else {
+			System.out.println("메일은 메일 형식을 준수하세요");
+			return;
+		}
+		
+		if(myPageManager.userInfoUpdate(userInfoUpdate)) {
+			System.out.println("정보 수정 완료");
+		} else {
+			System.out.println("정보 수정 실패");
+		}
 
 	}
 
@@ -363,6 +433,20 @@ public class ProjectUI {
 		System.out.println("현재 예약 내역");
 		System.out.println(BeforeChange);
 
+		System.out.println("변경하실 날짜를 입력해 주세요 ");
+		System.out.print("체크인 날짜 : ");
+		String checkInDate= scannerInput.next(); 
+		System.out.print("체크아웃 날짜 : ");
+		String checkOutDate = scannerInput.next(); 
+		
+		ReservationVO changeDate = new ReservationVO(reservationid,0,null,checkInDate,checkOutDate,0);
+		int result = myPageManager.reservationUpdateChangeDate(changeDate);
+		
+		if(result ==1) {
+			System.out.println("예약성공");
+		}else {
+			System.out.println("예약 실패 ");
+		}
 	}
 
 	public void updateRoomType() {
@@ -375,9 +459,43 @@ public class ProjectUI {
 		System.out.println("현재 예약 내역");
 		System.out.println(BeforeChange);
 		
-		
-		
- 
+		//System.out.println("예약하신 호텔을 입력해주세요");
+		int roomID = BeforeChange.getRoomID();
+				
+		//호텔 이름 추출
+		SearchHotelNameVO hotelNameOne =  myPageManager.searchHotelName(roomID);
+				
+		String hotelName = hotelNameOne.getHotelName();
+		//System.out.println(hotelName);
+						
+		List<ShowRooomTypeVO> list = myPageManager.showAvailableRoomByType(hotelName);
+				
+		System.out.println("예약 가능한 방 목록");
+		for(ShowRooomTypeVO r : list){
+			System.out.println(r);
+		}
+				
+		System.out.println("==========================================");
+		System.out.println("변경할 룸타입 입력 ");
+		String changedRoomType = scannerInput.next();
+				
+				
+		List<UnBookingRoomVO> roomlist = myPageManager.showRoom(changedRoomType);
+				
+				
+		for(UnBookingRoomVO u : roomlist) {
+			System.out.println(u);
+		}
+		int checked = roomlist.get(0).getRoomid();
+		ReservationVO update = new ReservationVO(reservationid,checked,null,null,null,0);
+		System.out.println(update);
+				
+		int result = myPageManager.reservationUpdateChangeRoomType(update);
+		if (result ==1) {
+		System.out.println("예약 변경성공");
+		}else {
+		System.out.println("변경 실패");
+		}
 	}
 
 	public void reservationDelete() {

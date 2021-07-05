@@ -41,4 +41,95 @@ where
 	reservationID = #{reservationID}
 </select>
 
+<update id="reservationUpdateChangeDate" parameterType="Reservation">
+update Reservation 
+set
+	checkInDate = #{checkInDate}
+	,checkOutDate =#{checkOutDate}
+where 
+	reservationID = #{reservationID}
+	
+</update>
+
+<select id="searchHotelName" parameterType="int" resultType="SearchHotelName">
+select
+	r.roomID
+	,h. hotelName
+from room r, hotel h
+where 
+	r.hotelID = h.hotelID
+	and roomID=#{roomID}
+</select>
+
+<select id="showAvailableRoomByType" parameterType="String" resultType="ShowRooomType">
+select 
+    DISTINCT roomtypename
+from 
+    roomtype rt, room r, hotel  h
+where 
+    r.hotelid = h.hotelid
+    and r.roomtypeid = rt.roomtypeid
+    and h.hotelname = #{hotelName}
+</select>
+
+<select id="showRoom" parameterType="String" resultType="UnBookingRoom">
+select 
+	r.roomId
+from 
+	room r, roomtype rt
+where 
+	r.roomtypeid = rt.roomtypeid
+	and rt.roomtypename = #{changedRoomType}
+	and r.BOOKINGSTATUS = 'unbooking'
+</select>
+
+<update id="reservationUpdateChangeRoomType" parameterType="Reservation">
+update Reservation 
+set
+	roomID = #{roomID}
+where 
+	reservationID = #{reservationID}
+</update>
+
+
+<!-- 회원 탈퇴 기능 -->
+<delete id="deleteAccount" parameterType="Homeuser" >
+   delete from 
+           UserPro
+   where
+   		userID = #{userID}
+</delete>
+
+<!-- 리뷰 출력 -->
+<select id="reviewList" resultType="ReviewBoard">
+select
+	reservationID
+	,starRating
+	,title
+	,contents
+	,to_date(reviewDate, 'yyyy-mm-dd') as reviewDate
+from
+	ReviewBoard
+order by
+	reviewDate desc
+</select>
+
+<!-- 회원 정보 수정 -->
+<update id="userInfoUpdate" parameterType="Homeuser">
+update
+	UserPro
+set
+	<if test="userPassword !=''">
+		userPassword = #{userPassword}
+	</if>
+	<if test="userEmail !=''">
+		,userEmail = #{userEmail}
+	</if>
+	<if test="userPhone !=''">
+		,userPhone = #{userPhone}
+	</if>
+where
+	userPassword = #{userPassword}
+</update>
+
 </mapper>
