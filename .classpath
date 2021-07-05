@@ -6,7 +6,5 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_241/jre/lib/ext/mybatis-3.4.6.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_241/jre/lib/ext/ojdbc6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

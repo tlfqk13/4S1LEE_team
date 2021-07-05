@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="hotel.dao.HotelMapper">
+<mapper namespace="hotel.dao.hotelMapper">
 
 
 <!-- 전체 출력 -->
@@ -104,18 +104,5 @@ reservation_seq.nextval
 )
 </insert>
 
-<!-- 결제정보 출력 -->>
-<select id="payBy">
-select 
-	rv.reservationID
-	,h.hotelName
-	,r.roomName
-	,p.payTypeID
-	,pt.payName
-from
-	hotel h, Room r, pay p, payType pt, reservation rv
-where
-	
-</select>
 
 </mapper>
