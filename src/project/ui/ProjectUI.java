@@ -504,8 +504,8 @@ public class ProjectUI {
 					break;
 				case 2:
 					System.out.println("<선 결제>");
-					System.out.println("1.신용카드");
-					System.out.println("2.무통장 입금");
+					System.out.println("1. 신용카드");
+					System.out.println("2. 무통장 입금");
 					System.out.print("선택 > ");
 					int key = scannerInput.nextInt();
 					switch (key) {
