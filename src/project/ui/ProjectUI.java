@@ -34,6 +34,8 @@ public class ProjectUI {
 	loginManager loginManager = new loginManager();
 	
 	AdminManager admingManager=new AdminManager();
+	
+	MyPageManager myPageManager = new MyPageManager();
 
 	HomeUserVO user = new HomeUserVO();
 	ReservationVO reservation = new ReservationVO();
