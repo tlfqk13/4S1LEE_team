@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotel.dao.MyPageMapper">
+
+<delete id="reservationDelete" parameterType="int">
+delete 
+from
+	Reservation
+where 
+	reservationID = #{reservationID}
+</delete>
+
+<select id="reservationList" parameterType="String" resultType="Reservation">
+select 
+	reservationID
+	,roomID
+	,userID
+	,checkInDate
+	,checkOutDate
+	,guestCount
+from 
+	Reservation
+where 
+	userID = #{userID}
+</select>
+
+<select id="selectOneReservation" parameterType="int" resultType="Reservation">
+select 
+	reservationID
+	,roomID
+	,userID
+	,checkInDate
+	,checkOutDate
+	,guestCount
+from 
+	Reservation
+where 
+	reservationID = #{reservationID}
+</select>
+
+</mapper>
