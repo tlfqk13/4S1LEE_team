@@ -18,7 +18,7 @@ import project.mgr.MyPageManager;
 // 자기 브랜치에서 작업하다가 내가 작업한거 master 브랜치로 merge 하고 싶을때는 
 // 무조건 "손동규"에게 물어보고 나머지 팀원들에게 master랑 merge한다고 알리고 하기
 //------------------------------------------------------------//
-
+// 현경 다시 돌아왔다 암 컴붹~
 
 public class ProjectUI {
 	public Scanner scannerInput = new Scanner(System.in);
