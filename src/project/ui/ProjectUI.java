@@ -490,7 +490,7 @@ public class ProjectUI {
 			
 
 			if(cnt > 0) {
-				//ㄹㅇㅇㅇ
+		
 				System.out.println("<결제 수단 선택>");
 				System.out.println("1. 현장 결제");
 				System.out.println("2. 선 결제");

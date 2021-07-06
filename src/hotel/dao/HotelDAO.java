@@ -78,7 +78,7 @@ public class HotelDAO {
 			}
 		} return list;
 	}
-	//dd
+	
 	public ArrayList<HotelEventVO> printAllEvent() {
 		SqlSession session = null;
 		ArrayList<HotelEventVO> list = null;
