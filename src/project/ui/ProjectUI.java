@@ -1,15 +1,20 @@
 package project.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import admin.vo.AdminManager;
 import admin.vo.AdminVO;
+import hotel.dao.HotelDAO;
 import hotel.dao.loginMapper;
-
+import hotel.vo.HotelInfoGetVO;
+import hotel.vo.HotelInfoPrintVO;
+import hotel.vo.Reservation1VO;
 import hotel.vo.ReservationVO;
 import myPage.vo.MyPageVO;
 import myPage.vo.HomeUserVO;
+import project.mgr.HotelManager;
 import project.mgr.MyPageManager;
 import project.mgr.signUpManager;
 import project.mgr.loginManager;
@@ -45,6 +50,9 @@ public class ProjectUI {
 	ReservationVO reservation = new ReservationVO();
 	MyPageVO mypage = new MyPageVO();
 
+	
+	private HotelManager hotelManager = new HotelManager();
+	private HotelDAO hotelDAO = new HotelDAO();
 
 	boolean loginCheck=true;
 	

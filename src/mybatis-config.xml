@@ -11,6 +11,14 @@
 	<typeAlias type="myPage.vo.MyPageVO" alias="MyPage"/>
 	<typeAlias type="hotel.vo.ReservationVO" alias="Reservation"/>
 	<typeAlias type="admin.vo.AdminVO" alias="Admin"/>
+	<typeAlias type="hotel.vo.ReservationVO" alias="Reservation" />
+	<typeAlias type="hotel.vo.HotelInfoPrintVO" alias="hotelInfoPrint" />
+	<typeAlias type="hotel.vo.HotelInfoGetVO" alias="hotelInfoGet" />
+	<typeAlias type="hotel.vo.HotelEventVO" alias="HotelEvent"/>
+		
+	<typeAlias type="hotel.vo.ReservationVO" alias="Reservation" />
+	<typeAlias type="hotel.vo.Reservation1VO" alias="Reservation1" />
+	
 	</typeAliases>
 	
 	<!-- DB접속 정보 셋팅 -->
@@ -32,5 +40,6 @@
 	<mapper resource="signUpMapper.xml"/>
 	<mapper resource="loginMapper.xml"/>
 	<mapper resource="AdminMapper.xml"/>
+	<mapper resource="HotelMapper.xml"/>
 	</mappers>
 </configuration>
