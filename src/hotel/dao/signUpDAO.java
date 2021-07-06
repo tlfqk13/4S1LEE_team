@@ -1,5 +1,7 @@
 package hotel.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -35,6 +37,21 @@ public class signUpDAO {
 			session=factory.openSession();
 			signUpMapper mapper=session.getMapper(signUpMapper.class);
 			homeUserVO=mapper.idDoubleCheck(id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			if(session!=null)session.close();
+		}
+		return homeUserVO;
+	}
+
+	public ArrayList<HomeUserVO> UserTable() {
+		SqlSession session=null;
+		ArrayList<HomeUserVO> homeUserVO=null;
+		try {
+			session=factory.openSession();
+			signUpMapper mapper=session.getMapper(signUpMapper.class);
+			homeUserVO=mapper.UserTable();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {

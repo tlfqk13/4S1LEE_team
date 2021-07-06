@@ -11,5 +11,9 @@ where
 	managerID=#{managerID} and managerPassword=#{managerPassword}
 </select>
 
+<select id="getReservation" parameterType="hotelInfoGet" resultType="hotelInfoGet">
+select * from hotel
+</select>
+
 
 </mapper>

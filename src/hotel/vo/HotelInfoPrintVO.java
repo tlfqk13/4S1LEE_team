@@ -5,6 +5,10 @@ public class HotelInfoPrintVO {
 	private String hotelAddress;
 	private String hotelGrade;
 	private String roomTypeName;
+	
+	//test 용도
+	private String hotelCity;
+	
 	private int maxPeople;
 	
 	
@@ -38,5 +42,11 @@ public class HotelInfoPrintVO {
 	}
 	public void setRoomTypeName(String roomTypeName) {
 		this.roomTypeName = roomTypeName;
+	}
+	public String getHotelCity() {
+		return hotelCity;
+	}
+	public void setHotelCity(String hotelCity) {
+		this.hotelCity = hotelCity;
 	}
 }
