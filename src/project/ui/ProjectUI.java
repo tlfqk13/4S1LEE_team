@@ -60,7 +60,9 @@ public class ProjectUI {
 	
 
 	public ProjectUI() {
+		
 		boolean run=true;
+		
 		while(run) {
 			printMainMenu();
 			int selectMenu=scannerInput.nextInt();
@@ -76,11 +78,9 @@ public class ProjectUI {
 				adminLogin();
 				break;
 			case 0:
-				System.out.println("");
-				run=false;
-				break;
-			default: 
-				break;
+				System.out.println("프로그램을 종료합니다");
+				return;
+			default:
 			}
 		}
 	}
@@ -203,37 +203,41 @@ public class ProjectUI {
 
 	private void userLogin() {
 		
+		boolean run=true;
+		
 		if(loginCheck()==true) {
 			
-			System.out.println("1 . 호텔");
-			System.out.println("2 . 레저");
-			System.out.println("3 . 교통");
-			System.out.println("4 . 마이 페이지");
+			while(true) {
+				System.out.println("1 . 호텔");
+				System.out.println("2 . 레저");
+				System.out.println("3 . 교통");
+				System.out.println("4 . 마이 페이지");
+				System.out.println("5 . 로그 아웃");
+		
+				int selectMenu=scannerInput.nextInt();
+		
+				switch(selectMenu) {
+				case 1:
+					hotel();
+					break;
+					//		case 2:
+					//			leisure();
+					//			break;
+					//		case 3: 
+					//			transport();
+					//			break;
+				case 4:
+					myPage();
+					break;
+				case 5:
+					loginCheck=false;
+					return;
+				default: 
+					break;
+				}
 	
-			int selectMenu=scannerInput.nextInt();
-	
-			switch(selectMenu) {
-			case 1:
-				hotel();
-				break;
-				//		case 2:
-				//			leisure();
-				//			break;
-				//		case 3: 
-				//			transport();
-				//			break;
-			case 4:
-				myPage();
-				break;
-			case 0:
-				System.out.println("");
-				break;
-			default: 
-				break;
 			}
-
 		}
-
 	}
 
 	public void myPage() {
