@@ -28,6 +28,7 @@ import project.mgr.signUpManager;
 // 무조건 "손동규"에게 물어보고 나머지 팀원들에게 master랑 merge한다고 알리고 하기
 //------------------------------------------------------------//
 // 현경 다시 돌아왔다 암 컴
+// 이거 바로 전 커밋 푸쉬,, 뭔가 이상함 
 
 public class ProjectUI {
 	public Scanner scannerInput = new Scanner(System.in);
