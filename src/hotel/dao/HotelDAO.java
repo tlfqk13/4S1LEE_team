@@ -10,7 +10,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import hotel.vo.HotelEventVO;
 import hotel.vo.HotelInfoGetVO;
 import hotel.vo.HotelInfoPrintVO;
-import hotel.vo.Reservation1VO;
 
 
 
@@ -116,6 +115,7 @@ public class HotelDAO {
 				session.close();
 			}
 		} return cnt;
+
 	}
 
 }

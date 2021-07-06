@@ -4,7 +4,7 @@ public class HotelInfoGetVO {
 	private int maxPeople;
 	private String hotelCity;
 
-	
+
 	public int getMaxPeople() {
 		return maxPeople;
 	}
@@ -17,6 +17,5 @@ public class HotelInfoGetVO {
 	public void setHotelCity(String hotelCity) {
 		this.hotelCity = hotelCity;
 	}
-
 
 }

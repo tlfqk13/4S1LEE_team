@@ -10,6 +10,7 @@ import hotel.vo.HotelInfoGetVO;
 import hotel.vo.HotelInfoPrintVO;
 import myPage.vo.HomeUserVO;
 
+
 public class HotelManager {
 	
 	private HotelDAO dao = new HotelDAO();

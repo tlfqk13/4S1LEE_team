@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- 게시판 처리 SQL 이 파일은 mapper인터페이스와연결되어야한다 namespace에는 mapper인터페이스의 경로와 이름을 정해준다 -->
 <mapper namespace="hotel.dao.HotelMapper">
 
 
@@ -62,47 +63,13 @@ from
 
 </select>
 
+<select id="">
 
-<!-- 호텔명으로 출력 -->
-<select id="selectByHotel" parameterType="String" resultType="hotelInfoGet">
 select
-	h.hotelName
-	,h.hotelAddress
-	,g.hotelGrade
-	,t.roomTypeName
-    ,t.maxPeople
-from
-    hotel h, hotelGrade g, RoomType t, Room r, Reservation rv
-where
-    h.hotelGradeID=g.hotelgradeID
-and
-    r.roomTypeID=t.roomTypeID
-and 
-    h.hotelID = r.hotelID
-and 
-    r.roomid = rv.roomid
-and
-    h.hotelName = #{hotelName}
+	
+
 </select>
 
-<!-- 예약 -->
-<insert id="insertReservation" parameterType="Reservation">
-insert into Reservation(
-reservationID
-,roomID
-,userID
-,checkInDate
-,checkOutDate
-,guestCount
-)values(
-reservation_seq.nextval
-,#{roomID}
-,#{userID}
-,#{checkInDate}
-,#{checkOutDate}
-,#{guestCount}
-)
-</insert>
 
 
 </mapper>
