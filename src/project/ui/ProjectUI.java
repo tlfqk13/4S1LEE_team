@@ -39,11 +39,12 @@ import project.mgr.loginManager;
 
 
 public class ProjectUI {
-
+	String necessaryuserID = null;
 	public Scanner scannerInput = new Scanner(System.in);
 	MyPageManager myPageManager = new MyPageManager();
 	
 	signUpManager signUpManager = new signUpManager();
+	
 	
 	loginManager loginManager = new loginManager();
 	
@@ -194,8 +195,8 @@ public class ProjectUI {
 		}
 		else {
 			loginCheck=true;
-			loginInfoVO login = new loginInfoVO();
-			login.setUserID(userID);
+			necessaryuserID = userID;
+			
 		}
 		return loginCheck;
 
@@ -489,6 +490,7 @@ public class ProjectUI {
 			
 			Reservation1VO hotel1 = new Reservation1VO();
 			loginInfoVO login = new loginInfoVO();
+			login.setUserID(necessaryuserID);
 			
 			hotel1.setRoomID(roomID);
 			hotel1.setCheckInDate(checkInDate);
