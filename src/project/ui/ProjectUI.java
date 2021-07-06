@@ -12,6 +12,7 @@ import hotel.vo.HotelInfoGetVO;
 import hotel.vo.HotelInfoPrintVO;
 import hotel.vo.Reservation1VO;
 import hotel.vo.ReservationVO;
+import hotel.vo.loginInfoVO;
 import myPage.vo.MyPageVO;
 import myPage.vo.HomeUserVO;
 import project.mgr.HotelManager;
@@ -191,6 +192,8 @@ public class ProjectUI {
 		}
 		else {
 			loginCheck=true;
+			loginInfoVO login = new loginInfoVO();
+			login.setUserID(userID);
 		}
 		return loginCheck;
 
@@ -466,8 +469,6 @@ public class ProjectUI {
 			System.out.println("예약하실 룸 타입을 입력하세요");
 			System.out.print("룸 타입 : ");
 			roomType = scannerInput.nextLine();
-			System.out.print("유저 아이디 : ");
-			userID = scannerInput.nextLine();
 			System.out.print("룸 아이디 : ");
 			roomID = scannerInput.nextInt();
 			scannerInput.nextLine();
@@ -477,11 +478,12 @@ public class ProjectUI {
 			checkOutDate = scannerInput.nextLine();
 			
 			Reservation1VO hotel1 = new Reservation1VO();
+			loginInfoVO login = new loginInfoVO();
 			
 			hotel1.setRoomID(roomID);
 			hotel1.setCheckInDate(checkInDate);
 			hotel1.setCheckOutDate(checkOutDate);
-			hotel1.setUserID(userID);
+			hotel1.setUserID(login.getUserID());
 			hotel1.setGuestCount(maxPeople);
 			
 			System.out.println(hotel1);
