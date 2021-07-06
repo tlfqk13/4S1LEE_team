@@ -11,6 +11,21 @@ public class ReservationVO {
 	public ReservationVO() {
 		
 	}
+	
+	
+
+	public ReservationVO(int reservationID, int roomID, String userID, String checkInDate, String checkOutDate,
+			int guestCount) {
+		super();
+		this.reservationID = reservationID;
+		this.roomID = roomID;
+		this.userID = userID;
+		this.checkInDate = checkInDate;
+		this.checkOutDate = checkOutDate;
+		this.guestCount = guestCount;
+	}
+
+
 
 	public int getReservationID() {
 		return reservationID;

@@ -9,6 +9,18 @@ public class MyPageVO {
 	public MyPageVO() {
 	
 	}
+	
+	
+
+	public MyPageVO(String userID, int reservationID, int payID, String review) {
+		super();
+		this.userID = userID;
+		this.reservationID = reservationID;
+		this.payID = payID;
+		this.review = review;
+	}
+
+
 
 	public String getUserID() {
 		return userID;
