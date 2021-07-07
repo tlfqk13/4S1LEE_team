@@ -104,5 +104,15 @@ reservation_seq.nextval
 ,#{guestCount}
 )
 </insert>
+<!-- 이제 룸아이디로 가격을 넣어둘겁니다 -->
+<select id="">
+select
+	hotelname
+	,roomID
+	,userID
+	,roomTypeName
+from 
+	
+</select>
 
 </mapper>

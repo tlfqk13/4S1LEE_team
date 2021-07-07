@@ -471,7 +471,7 @@ public class ProjectUI {
 
 		ArrayList<HotelInfoPrintVO> list = hotelManager.hotelsearch(h);
 		if (list.isEmpty()) {
-			System.out.println("해당 검색결과가 업습니다");
+			System.out.println("해당 검색결과가 없습니다");
 		} else {
 			System.out.println("룸 아이디 \t 호텔 이름 \t 호텔 평점 \t 호텔주소 \t \t룸타입 \t 최대 인원수");
 			for (HotelInfoPrintVO h1 : list) {
@@ -480,10 +480,14 @@ public class ProjectUI {
 						+ h1.getRoomTypeName()+"\t"+h1.getMaxPeople());
 
 			}
+			
 			scannerInput.nextLine();
 			System.out.println("예약하실 룸 아이디를 입력하세요");
 			System.out.print("룸 아이디 : ");
 			roomID = scannerInput.nextInt();
+			
+			
+			
 			scannerInput.nextLine();
 			System.out.print("체크인 : ");
 			checkInDate = scannerInput.nextLine();
@@ -493,7 +497,7 @@ public class ProjectUI {
 
 				Reservation1VO hotel1 = new Reservation1VO();
 				loginInfoVO login = new loginInfoVO();
-//				RoomVO room = new RoomVO();
+
 				login.setUserID(necessaryuserID);
 				
 				hotel1.setRoomID(roomID);
@@ -501,10 +505,6 @@ public class ProjectUI {
 				hotel1.setCheckOutDate(checkOutDate);
 				hotel1.setUserID(login.getUserID());
 				hotel1.setGuestCount(maxPeople);
-		
-//				System.out.println(hotel1.getRoomID());
-				
-//				System.out.println(hotel1);
 				
 				int cnt = hotelDAO.insertReservation(hotel1);
 				if(cnt > 0) {
