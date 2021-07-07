@@ -49,4 +49,11 @@ public class HotelInfoPrintVO {
 	public void setHotelCity(String hotelCity) {
 		this.hotelCity = hotelCity;
 	}
+	@Override
+	public String toString() {
+		return "HotelInfoPrintVO [hotelName=" + hotelName + ", hotelAddress=" + hotelAddress + ", hotelGrade="
+				+ hotelGrade + ", roomTypeName=" + roomTypeName + ", hotelCity=" + hotelCity + ", maxPeople="
+				+ maxPeople + "]";
+	}
+	
 }

@@ -6,7 +6,7 @@
 <mapper namespace="hotel.dao.loginMapper">
 
 <select id="loginIdCheck" parameterType="HomeUser" resultType="HomeUser" >
-select * from UserPro
+select * from HomeUser
 
 where 
 	userID=#{userID}
@@ -14,7 +14,7 @@ where
 </select>
 
 <select id="loginPasswordCheck" parameterType="HomeUser" resultType="HomeUser" >
-select * from UserPro
+select * from HomeUser
 
 where 
 	userPassword=#{userPassword}

@@ -95,6 +95,7 @@ reservationID
 ,checkOutDate
 ,guestCount
 ,price
+,payStatus
 )values(
 reservation_seq.nextval
 ,#{roomID}
@@ -102,8 +103,43 @@ reservation_seq.nextval
 ,#{checkInDate}
 ,#{checkOutDate}
 ,#{guestCount}
-,10
+,5000000
+,'결제대기'
 )
+</insert>
+
+<select id="reservation1voList" resultType="Reservation1vo">
+
+select 
+	r.reservationID
+	,r.userID
+    ,h.hotelname
+    ,r.checkindate
+    ,r.checkoutdate
+    ,r.payStatus
+    ,r.price
+from 
+	Reservation r, room m,hotel h
+where 
+    userID=#{userID} and m.roomID=r.roomID and m.hotelID=h.hotelID
+
+</select>
+
+<!-- 결제 테이블 입력 -->
+<insert id="payInsert" parameterType="pay">
+insert into pay(
+	payID
+	,reservationID
+	,payDay
+	,payTypeID
+	,payStatus
+)values(
+   pay_seq.nextval
+   ,#{reservationID}
+   ,#{payDay}
+   ,#{payTypeID}
+   ,#{payStatus}
+   )
 </insert>
 
 

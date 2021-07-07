@@ -5,12 +5,17 @@ public class PayVO {
 	private int payID;
 	private int reservationID;
 	private String payDay;	
-	private String payType;
+	private int payTypeID;
 	private String payStatus;
-	
-	
+
 	public PayVO() {
 		
+	}
+	public PayVO(int reservationID, String payDay, int payTypeID, String payStatus) {
+		this.reservationID=reservationID;
+		this.payDay=payDay;
+		this.payTypeID=payTypeID;
+		this.payStatus=payStatus;
 	}
 	public int getPayID() {
 		return payID;
@@ -30,11 +35,11 @@ public class PayVO {
 	public void setPayDay(String payDay) {
 		this.payDay = payDay;
 	}
-	public String getPayType() {
-		return payType;
+	public int getPayType() {
+		return payTypeID;
 	}
-	public void setPayType(String payType) {
-		this.payType = payType;
+	public void setPayType(int payTypeID) {
+		this.payTypeID = payTypeID;
 	}
 	public String getPayStatus() {
 		return payStatus;
@@ -42,13 +47,12 @@ public class PayVO {
 	public void setPayStatus(String payStatus) {
 		this.payStatus = payStatus;
 	}
+	
 	@Override
 	public String toString() {
 		return "PayVO [payID=" + payID + ", reservationID=" + reservationID + ", payDay=" + payDay + ", payType="
-				+ payType + ", payStatus=" + payStatus + "]";
+				+ payTypeID + ", payStatus=" + payStatus + "]";
 	}
-	
-	
-	
+
 
 }

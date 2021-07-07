@@ -59,14 +59,15 @@ public class ReservationVO {
 	public void setGuestCount(int guestCount) {
 		this.guestCount = guestCount;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "ReservationVO [reservationID=" + reservationID + ", roomID=" + roomID + ", userID=" + userID
 				+ ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate + ", guestCount=" + guestCount
 				+ "]";
 	}
-	
+
+
 	
 	
 }

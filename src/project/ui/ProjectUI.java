@@ -9,17 +9,20 @@ import java.util.Scanner;
 import admin.vo.AdminManager;
 import admin.vo.AdminVO;
 import hotel.dao.HotelDAO;
+import hotel.dao.PayDAO;
 import hotel.dao.loginMapper;
 import hotel.dao.signUpMapper;
 import hotel.vo.HotelEventVO;
 import hotel.vo.HotelInfoGetVO;
 import hotel.vo.HotelInfoPrintVO;
+import hotel.vo.PayVO;
 import hotel.vo.Reservation1VO;
 import hotel.vo.ReservationVO;
 import myPage.vo.MyPageVO;
 import myPage.vo.HomeUserVO;
 import project.mgr.HotelManager;
 import project.mgr.MyPageManager;
+import project.mgr.PayManager;
 import project.mgr.signUpManager;
 import project.mgr.loginManager;
 
@@ -44,15 +47,25 @@ public class ProjectUI {
 	
 	AdminManager admingManager=new AdminManager();
 	
+	PayManager payManger = new PayManager();
+	
 	MyPageManager myPageManager = new MyPageManager();
 	private HotelManager hotelManager = new HotelManager();
-
+	
 	HomeUserVO user = new HomeUserVO();
+	private HomeUserVO test=null;
+	
 	ReservationVO reservation = new ReservationVO();
+	private ReservationVO reservationtest=null;
 	MyPageVO mypage = new MyPageVO();
 	
 	private HotelDAO hotelDAO=new HotelDAO();
+	
+	private PayDAO payDAO=new PayDAO();
 
+	
+	private Reservation1VO r1vo_presentChar=null;
+	private int payUserId=0;
 
 	
 
@@ -194,6 +207,9 @@ public class ProjectUI {
 		}
 		else {
 			loginCheck=true;
+			System.out.println("아이디 테스트 "+ homeuserVO.getUserID());
+			test=homeuserVO;
+			System.out.println("아이디 테스트 "+ test.getUserID());
 		}
 		return loginCheck;
 	}
@@ -301,13 +317,14 @@ public class ProjectUI {
 		System.out.println("내 예약 내역 출력");
 		
 		//String userid = user.getUserID();
-		System.out.println("아이디 입력");
-		String userid = scannerInput.next();
-		List<ReservationVO> list = myPageManager.reservationList(userid);
+//		System.out.println("아이디 입력");
+//		String userid = scannerInput.next();
+		List<ReservationVO> list = myPageManager.reservationList(test.getUserID());
 		
-		for(ReservationVO r : list) {
-			System.out.println(r);
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
 		}
+	
 	}
 
 	public void reviewList() {
@@ -418,19 +435,23 @@ public class ProjectUI {
 		// TODO Auto-generated method stub
 		System.out.println("<호텔>");
 		System.out.println("1 . 검색 및 예약");
-		System.out.println("2 . 진행중인 이벤트");
-		System.out.println("3 . 전체 이벤트");
+		System.out.println("2 . 결제");
+		System.out.println("3 . 진행중인 이벤트");
 		System.out.println("4. discount");
+		
+		System.out.println("지금 접속자 아이디 : " + test.getUserID());
+		
+		
 		int selectMenu = scannerInput.nextInt();
 		switch (selectMenu) {
 		case 1:
 			searchAndReservation();
 			break;
 		case 2:
-			ongoingEvent();
+			reservationCart();
 			break;
 		case 3:
-			allEvent();
+			ongoingEvent();
 			break;
 		case 0:
 			System.out.println("");
@@ -444,24 +465,27 @@ public class ProjectUI {
 	   public void searchAndReservation() {
 		      String checkInDate,checkOutDate, hotelCity, hotelName,roomType,userID;
 		      int maxPeople, roomID, reservationID;
+		      
 		      scannerInput.nextLine();
 		      // TODO Auto-generated method stub
 		      System.out.println("검색 및 예약");
-		      
-		   
+		    
 		      System.out.println("1 . 지역");
 		      hotelCity = scannerInput.nextLine();
 		      System.out.println("2 . 예약 인원 수");
 		      maxPeople = scannerInput.nextInt();
-
+		 
 		      HotelInfoGetVO h = new HotelInfoGetVO();
 
 		      h.setHotelCity(hotelCity);
 		      h.setMaxPeople(maxPeople);
-
+		      
+		 
 		      ArrayList<HotelInfoPrintVO> list = hotelManager.hotelsearch(h);
 		      if (list.isEmpty()) {
 		         System.out.println("해당 검색결과가 없습니다");
+		         
+	
 		      } else {
 		         System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수");
 		         for (HotelInfoPrintVO h1 : list) {
@@ -477,8 +501,8 @@ public class ProjectUI {
 		         System.out.println("예약하실 룸 타입을 입력하세요");
 		         System.out.print("룸 타입 : ");
 		         roomType = scannerInput.nextLine();
-		         System.out.print("유저 아이디 : ");
-		         userID = scannerInput.nextLine();
+//		         System.out.print("유저 아이디 : ");
+		         userID = test.getUserID();
 		         System.out.print("룸 아이디 : ");
 		         roomID = scannerInput.nextInt();
 		         scannerInput.nextLine();
@@ -500,49 +524,116 @@ public class ProjectUI {
 		         
 		         int cnt = hotelDAO.insertReservation(hotel1);
 		         
-
-		         if(cnt > 0) {
-		      
-		            System.out.println("<결제 수단 선택>");
-		            System.out.println("1. 현장 결제");
-		            System.out.println("2. 선 결제");
-
-		            System.out.print("선택 > ");
-		            int menu = scannerInput.nextInt();
-		            
-		            
-		            switch (menu) {
-		            case 1:
-		               System.out.println("결제 완료되었습니다.");
-		               break;
-		            case 2:
-		               System.out.println("<선 결제>");
-		               System.out.println("1. 신용카드");
-		               System.out.println("2. 무통장 입금");
-		               System.out.print("선택 > ");
-		               int key = scannerInput.nextInt();
-		               switch (key) {
-		               case 1:
-		                  
-		                  System.out.println("결제 완료되었습니다.");
-		                  break;
-		               case 2:
-		                  System.out.println("결제 완료되었습니다.");
-		                  break;
-		               default:
-		                  break;
-		               }
-		               break;
-		            default:
-		               break;
-		            }
-		            
-		         } else {
-		            System.out.println("예약 실패했습니다.");
-		         
-		         }
+		         reservationCart();
 		      }
 		   }
+	   
+	public void reservationCart() {
+		
+		List<Reservation1VO> list = payManger.payList(test.getUserID());
+		System.out.println("유저아이디 " + test.getUserID());
+		Reservation1VO vo = null;
+		System.out.println(" 예약 ID " + " 결제 상태 " + " 유저 ID");
+		System.out.println("사이즈 " + list.size());
+		for (int i = 0; i < list.size(); i++) {
+			vo = list.get(i);
+			System.out.println(
+					(i + 1) + " : "
+							+vo.getHotelName()+"\t" 
+							+vo.getCheckInDate()+"\t"
+							+vo.getCheckOutDate()+"\t"
+							+ vo.getPrice()+"원"+ "\t" 
+							+ vo.getPayStatus() + "\t" 
+							+ vo.getUserID() + "\t");
+		}
+		System.out.println("번호 선택 > ");
+		int num = scannerInput.nextInt();
+		if (num == 0) {
+			return;
+		}
+		r1vo_presentChar = list.get(num - 1);
+
+		pay(r1vo_presentChar);
+
+	}
+	
+	public void pay(Reservation1VO r1vo_presentChar) {
+		
+		int cnt=0;
+		
+		System.out.println("<결제 수단 선택>");
+		System.out.println("1. 현장 결제");
+		System.out.println("2. 선 결제");
+
+		System.out.print("선택 > ");
+		int menu = scannerInput.nextInt();
+		
+		
+		
+		if(cnt!=0) {
+			System.out.println("결제가 생성되었습니다");
+		}else {
+			System.out.println("결제 생성에 실패했습니다");
+		}
+	  
+		switch (menu) {
+		case 1:
+			System.out.println("예약 완료되었습니다. 당일 호텔에서 지불해주세요 !!");
+			break;
+		case 2:
+			System.out.println("<선 결제>");
+			System.out.println("1. 신용카드");
+			System.out.println("2. 무통장 입금");
+			System.out.print("선택 > ");
+			int key = scannerInput.nextInt();
+			switch (key) {
+			case 1:
+				
+				int reservationID=r1vo_presentChar.getReservationID();
+				String payStatus=r1vo_presentChar.getPayStatus();
+				String payDay="2021-05-15";
+				int payTypeID=1;
+				
+				PayVO vo=new PayVO(reservationID,payDay,payTypeID,payStatus);
+			
+				System.out.println("pay에 vo"+vo);
+				
+				cnt=payDAO.payInsert(vo);
+				
+				
+				if(cnt!=0) {
+					System.out.println("카드 결제 완료되었습니다.");
+					hotelDAO.payUpdate();
+					break;
+				}
+				else {
+					System.out.println("결제 취소");
+					break;
+				}
+				
+				
+			case 2:
+				int reservationID1=r1vo_presentChar.getReservationID();
+				String payStatus1=r1vo_presentChar.getPayStatus();
+				String payDay1="10";
+				int payTypeID1=1;
+				
+				PayVO vo1=new PayVO(reservationID1,payDay1,payTypeID1,payStatus1);
+			
+				System.out.println("pay에 vo"+vo1);
+				
+				cnt=payDAO.payInsert(vo1);
+				System.out.println("현금 결제 완료되었습니다.");
+				break;
+			default:
+				break;
+			}
+			break;
+		default:
+			break;
+		}
+
+	}
 
 	public void ongoingEvent() {
 		System.out.println("진행중인 이벤트");

@@ -7,7 +7,9 @@ import java.util.Map;
 import hotel.vo.HotelEventVO;
 import hotel.vo.HotelInfoGetVO;
 import hotel.vo.HotelInfoPrintVO;
+import hotel.vo.PayVO;
 import hotel.vo.Reservation1VO;
+import hotel.vo.ReservationVO;
 
 
 public interface HotelMapper {
@@ -19,5 +21,9 @@ public interface HotelMapper {
 	
 	public ArrayList<HotelInfoPrintVO> selectByHotel (String HotelName);
 	public int insertReservation (Reservation1VO reservation);
+
+	public ArrayList<Reservation1VO> reservation1voList(String string);
+
+	public int payInsert(PayVO vo);
 
 }
