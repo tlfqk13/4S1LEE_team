@@ -506,6 +506,7 @@ public class ProjectUI {
 				hotel1.setUserID(login.getUserID());
 				hotel1.setGuestCount(maxPeople);
 				
+
 				int cnt = hotelDAO.insertReservation(hotel1);
 				if(cnt > 0) {
 			

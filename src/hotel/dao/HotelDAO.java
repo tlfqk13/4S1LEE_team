@@ -116,6 +116,8 @@ public class HotelDAO {
 				session.close();
 			}
 		} return cnt;
+	
+
 	}
 
 	

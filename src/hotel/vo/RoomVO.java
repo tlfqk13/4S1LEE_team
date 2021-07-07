@@ -7,7 +7,14 @@ public class RoomVO {
 	private String bookingStatus;
 	private String roomType;
 	private int price;
+	private int roomTypeName;
 	
+	public int getRoomTypeName() {
+		return roomTypeName;
+	}
+	public void setRoomTypeName(int roomTypeName) {
+		this.roomTypeName = roomTypeName;
+	}
 	public int getPrice() {
 		return price;
 	}

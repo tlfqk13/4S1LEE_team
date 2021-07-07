@@ -19,6 +19,7 @@
 	<typeAlias type="hotel.vo.ReservationVO" alias="Reservation" />
 	<typeAlias type="hotel.vo.Reservation1VO" alias="Reservation1" />
 	<typeAlias type="hotel.vo.PayVO" alias="pay" />
+	<typeAlias type="hotel.vo.RoomVO" alias="Room" />
 
 	
 	</typeAliases>

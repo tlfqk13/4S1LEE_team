@@ -104,15 +104,17 @@ reservation_seq.nextval
 ,#{guestCount}
 )
 </insert>
+
 <!-- 이제 룸아이디로 가격을 넣어 둘 겁니다 -->
-<select id="">
+<select id="searchPriceByRoomID" parameterType="int" resultType="hotelInfoPrint">
 select
-	hotelname
-	,roomID
-	,userID
-	,roomTypeName
+	,r.price
 from 
-	
+	Room r, Reservation rv
+where
+	r.roomID = rv.roomID
+and 
+	rv.roomID = #{rv.roomID}
 </select>
 
 </mapper>
