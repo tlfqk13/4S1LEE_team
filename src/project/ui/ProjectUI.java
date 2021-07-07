@@ -487,15 +487,14 @@ public class ProjectUI {
 		         
 	
 		      } else {
-		         System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수");
+		         System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수 \t 룸타입ID");
 		         for (HotelInfoPrintVO h1 : list) {
-
 		            System.out.println(h1.getHotelName() + "\t" 
 		                  + h1.getHotelGrade() + "\t" 
 		                  + h1.getHotelAddress() + "\t"
-		                  + h1.getRoomTypeName()+"\t"
-		                  +h1.getMaxPeople());
-
+		                  + h1.getRoomTypeName()+ "\t"
+		                  +h1.getMaxPeople()+ "\t"
+		            	  +h1.getRoomID());
 		         }
 		         scannerInput.nextLine();
 		         System.out.println("예약하실 룸 타입을 입력하세요");

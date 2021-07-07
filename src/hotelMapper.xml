@@ -15,6 +15,7 @@ select
 	,g.hotelGrade
 	,t.roomTypeName
 	,t.maxPeople
+	,r.roomID
 from
 	hotel h, hotelGrade g, RoomType t, Room r
 where
@@ -72,15 +73,13 @@ select
 	,t.roomTypeName
     ,t.maxPeople
 from
-    hotel h, hotelGrade g, RoomType t, Room r, Reservation rv
+    hotel h, hotelGrade g, RoomType t, Room r
 where
     h.hotelGradeID=g.hotelgradeID
 and
     r.roomTypeID=t.roomTypeID
 and 
     h.hotelID = r.hotelID
-and 
-    r.roomid = rv.roomid
 and
     h.hotelName = #{hotelName}
 </select>

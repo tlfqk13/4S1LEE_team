@@ -6,6 +6,8 @@ public class HotelInfoPrintVO {
 	private String hotelGrade;
 	private String roomTypeName;
 	
+	private String roomID;
+	
 	//test 용도
 	private String hotelCity;
 	
@@ -49,11 +51,20 @@ public class HotelInfoPrintVO {
 	public void setHotelCity(String hotelCity) {
 		this.hotelCity = hotelCity;
 	}
+	
+	public String getRoomID() {
+		return roomID;
+	}
+	public void setRoomID(String roomID) {
+		this.roomID = roomID;
+	}
+	
 	@Override
 	public String toString() {
 		return "HotelInfoPrintVO [hotelName=" + hotelName + ", hotelAddress=" + hotelAddress + ", hotelGrade="
 				+ hotelGrade + ", roomTypeName=" + roomTypeName + ", hotelCity=" + hotelCity + ", maxPeople="
 				+ maxPeople + "]";
 	}
-	
+
+
 }
