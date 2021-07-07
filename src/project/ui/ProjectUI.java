@@ -486,9 +486,8 @@ public class ProjectUI {
 			System.out.print("룸 아이디 : ");
 			roomID = scannerInput.nextInt();
 			
-			
-			
 			scannerInput.nextLine();
+			System.out.println("*체크인/아웃 날짜는 21/07/07 형태로 입력하세요.");
 			System.out.print("체크인 : ");
 			checkInDate = scannerInput.nextLine();
 			System.out.print("체크아웃 : ");
@@ -500,13 +499,14 @@ public class ProjectUI {
 
 				login.setUserID(necessaryuserID);
 				
+				
 				hotel1.setRoomID(roomID);
 				hotel1.setCheckInDate(checkInDate);
 				hotel1.setCheckOutDate(checkOutDate);
 				hotel1.setUserID(login.getUserID());
 				hotel1.setGuestCount(maxPeople);
-				
 
+			
 				int cnt = hotelDAO.insertReservation(hotel1);
 				if(cnt > 0) {
 			

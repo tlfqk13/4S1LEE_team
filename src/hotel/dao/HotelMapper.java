@@ -19,7 +19,7 @@ public interface HotelMapper {
 	
 	public ArrayList<HotelInfoPrintVO> selectByHotel (String HotelName);
 	public int insertReservation (Reservation1VO reservation);
-	
+	public int searchPriceByRoomID (int roomID);
 
 
 }

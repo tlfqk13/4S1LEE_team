@@ -29,4 +29,6 @@ public class HotelManager {
 		return list;
 	}
 
+
+	
 }

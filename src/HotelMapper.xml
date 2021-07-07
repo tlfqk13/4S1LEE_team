@@ -72,6 +72,7 @@ select
 	,g.hotelGrade
 	,t.roomTypeName
     ,t.maxPeople
+    ,rv.price
 from
     hotel h, hotelGrade g, RoomType t, Room r, Reservation rv
 where
@@ -84,6 +85,8 @@ and
     r.roomid = rv.roomid
 and
     h.hotelName = #{hotelName}
+and
+	r.roomID = #{r.roomID}
 </select>
 
 <!-- 예약 -->
@@ -95,6 +98,7 @@ reservationID
 ,checkInDate
 ,checkOutDate
 ,guestCount
+,price
 )values(
 reservation_seq.nextval
 ,#{roomID}
@@ -102,13 +106,14 @@ reservation_seq.nextval
 ,#{checkInDate}
 ,#{checkOutDate}
 ,#{guestCount}
+,#{price}
 )
 </insert>
 
 <!-- 이제 룸아이디로 가격을 넣어 둘 겁니다 -->
 <select id="searchPriceByRoomID" parameterType="int" resultType="hotelInfoPrint">
 select
-	,r.price
+	r.price
 from 
 	Room r, Reservation rv
 where

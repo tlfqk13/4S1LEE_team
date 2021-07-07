@@ -119,6 +119,21 @@ public class HotelDAO {
 	
 
 	}
+	public int searchPriceByRoomID (int roomID) {
+		SqlSession session = null;
+		int cnt = 0;
+		try {
+			session = factory.openSession();
+			HotelMapper mapper = session.getMapper(HotelMapper.class);
+			cnt = mapper.searchPriceByRoomID(roomID);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session != null) {
+				session.close();
+			}
+		} return cnt;
+	}
 
 	
 
