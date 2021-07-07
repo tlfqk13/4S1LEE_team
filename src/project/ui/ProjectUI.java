@@ -1,26 +1,30 @@
 package project.ui;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 import admin.vo.AdminManager;
 import admin.vo.AdminVO;
 import hotel.dao.HotelDAO;
-import hotel.dao.loginMapper;
 import hotel.vo.HotelEventVO;
 import hotel.vo.HotelInfoGetVO;
 import hotel.vo.HotelInfoPrintVO;
 import hotel.vo.Reservation1VO;
 import hotel.vo.ReservationVO;
+import hotel.vo.RoomVO;
 import hotel.vo.loginInfoVO;
-import myPage.vo.MyPageVO;
 import myPage.vo.HomeUserVO;
+import myPage.vo.MyPageVO;
+import hotel.vo.PayVO;
 import project.mgr.HotelManager;
 import project.mgr.MyPageManager;
-import project.mgr.signUpManager;
 import project.mgr.loginManager;
+import project.mgr.signUpManager;
 
 
 
@@ -469,17 +473,15 @@ public class ProjectUI {
 		if (list.isEmpty()) {
 			System.out.println("해당 검색결과가 업습니다");
 		} else {
-			System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수");
+			System.out.println("룸 아이디 \t 호텔 이름 \t 호텔 평점 \t 호텔주소 \t \t룸타입 \t 최대 인원수");
 			for (HotelInfoPrintVO h1 : list) {
 
-				System.out.println(h1.getHotelName() + "\t" + h1.getHotelGrade() + "\t" + h1.getHotelAddress() + "\t"
+				System.out.println(h1.getRoomID()+"\t"+h1.getHotelName() + "\t" + h1.getHotelGrade() + "\t" + h1.getHotelAddress() + "\t"
 						+ h1.getRoomTypeName()+"\t"+h1.getMaxPeople());
 
 			}
 			scannerInput.nextLine();
-			System.out.println("예약하실 룸 타입을 입력하세요");
-			System.out.print("룸 타입 : ");
-			roomType = scannerInput.nextLine();
+			System.out.println("예약하실 룸 아이디를 입력하세요");
 			System.out.print("룸 아이디 : ");
 			roomID = scannerInput.nextInt();
 			scannerInput.nextLine();
@@ -487,64 +489,90 @@ public class ProjectUI {
 			checkInDate = scannerInput.nextLine();
 			System.out.print("체크아웃 : ");
 			checkOutDate = scannerInput.nextLine();
-			
-			Reservation1VO hotel1 = new Reservation1VO();
-			loginInfoVO login = new loginInfoVO();
-			login.setUserID(necessaryuserID);
-			
-			hotel1.setRoomID(roomID);
-			hotel1.setCheckInDate(checkInDate);
-			hotel1.setCheckOutDate(checkOutDate);
-			hotel1.setUserID(login.getUserID());
-			hotel1.setGuestCount(maxPeople);
-			
-			System.out.println(hotel1);
-			
-			int cnt = hotelDAO.insertReservation(hotel1);
-			
-
-			if(cnt > 0) {
 		
-				System.out.println("<결제 수단 선택>");
-				System.out.println("1. 현장 결제");
-				System.out.println("2. 선 결제");
 
-				System.out.print("선택 > ");
-				int menu = scannerInput.nextInt();
+				Reservation1VO hotel1 = new Reservation1VO();
+				loginInfoVO login = new loginInfoVO();
+//				RoomVO room = new RoomVO();
+				login.setUserID(necessaryuserID);
 				
+				hotel1.setRoomID(roomID);
+				hotel1.setCheckInDate(checkInDate);
+				hotel1.setCheckOutDate(checkOutDate);
+				hotel1.setUserID(login.getUserID());
+				hotel1.setGuestCount(maxPeople);
+		
+//				System.out.println(hotel1.getRoomID());
 				
-				switch (menu) {
-				case 1:
-					System.out.println("결제 완료되었습니다.");
-					break;
-				case 2:
-					System.out.println("<선 결제>");
-					System.out.println("1. 신용카드");
-					System.out.println("2. 무통장 입금");
+//				System.out.println(hotel1);
+				
+				int cnt = hotelDAO.insertReservation(hotel1);
+				if(cnt > 0) {
+			
+					System.out.println("<결제 수단 선택>");
+					System.out.println("1. 현장 결제");
+					System.out.println("2. 선 결제");
+
 					System.out.print("선택 > ");
-					int key = scannerInput.nextInt();
-					switch (key) {
+					int menu = scannerInput.nextInt();
+					
+					
+					switch (menu) {
 					case 1:
+						hotel1.setPayTypeID(1);
+						hotel1.setPayTypeName("현장결제");
+						System.out.println(hotel1);
 						
-						System.out.println("결제 완료되었습니다.");
+						PayVO pay = new PayVO();
+						pay.setReservationID(hotel1.getReservationID());
+						pay.setPayDay("오늘");
+						pay.setPayType("1");
+						pay.setPayStatus("결제완료");
+
+						
 						break;
 					case 2:
-						System.out.println("결제 완료되었습니다.");
+						System.out.println("<선 결제>");
+						System.out.println("1. 신용카드");
+						System.out.println("2. 무통장 입금");
+						System.out.print("선택 > ");
+						int key = scannerInput.nextInt();
+						switch (key) {
+						case 1:
+							hotel1.setPayTypeID(2);
+							hotel1.setPayTypeName("신용카드");
+							System.out.println(hotel1);
+							System.out.println("결제 완료되었습니다.");
+							break;
+						case 2:
+							hotel1.setPayTypeID(3);
+							hotel1.setPayTypeName("무통장입금");
+							System.out.println(hotel1);
+							System.out.println("해당 계좌 번호로 입금 바랍니다.");
+							System.out.println("*계좌번호 : (국민은행) 032902-04-354462");
+							System.out.println("*예금주 : 신하연");
+							break;
+						default:
+							break;
+						}
 						break;
 					default:
 						break;
 					}
-					break;
-				default:
-					break;
-				}
+					
+				} else {
+					System.out.println("예약 실패했습니다.");
 				
-			} else {
-				System.out.println("예약 실패했습니다.");
-			
+				}
 			}
 		}
-	}
+
+			
+			
+		
+			
+			
+		
 	public void ongoingEvent() {
 		System.out.println("진행중인 이벤트");
 //		LocalDate today = LocalDate.now();

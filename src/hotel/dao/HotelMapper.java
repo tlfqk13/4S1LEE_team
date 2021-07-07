@@ -1,13 +1,13 @@
 package hotel.dao;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Map;
 
 import hotel.vo.HotelEventVO;
 import hotel.vo.HotelInfoGetVO;
 import hotel.vo.HotelInfoPrintVO;
+import hotel.vo.PayVO;
 import hotel.vo.Reservation1VO;
+import hotel.vo.RoomVO;
 
 
 public interface HotelMapper {
@@ -19,5 +19,7 @@ public interface HotelMapper {
 	
 	public ArrayList<HotelInfoPrintVO> selectByHotel (String HotelName);
 	public int insertReservation (Reservation1VO reservation);
+	
+
 
 }

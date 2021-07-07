@@ -1,7 +1,5 @@
 package hotel.dao;
 
-import java.time.LocalDate;
-
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +9,8 @@ import hotel.vo.HotelEventVO;
 import hotel.vo.HotelInfoGetVO;
 import hotel.vo.HotelInfoPrintVO;
 import hotel.vo.Reservation1VO;
+import hotel.vo.RoomVO;
+
 
 
 
@@ -117,5 +117,7 @@ public class HotelDAO {
 			}
 		} return cnt;
 	}
+
+	
 
 }

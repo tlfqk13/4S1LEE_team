@@ -4,11 +4,10 @@ package project.mgr;
 import java.util.ArrayList;
 
 import hotel.dao.HotelDAO;
-import hotel.dao.loginDAO;
 import hotel.vo.HotelEventVO;
 import hotel.vo.HotelInfoGetVO;
 import hotel.vo.HotelInfoPrintVO;
-import myPage.vo.HomeUserVO;
+import hotel.vo.RoomVO;
 
 public class HotelManager {
 	
@@ -29,5 +28,5 @@ public class HotelManager {
 		ArrayList<HotelEventVO> list = dao.printAllEvent();
 		return list;
 	}
-	
+
 }

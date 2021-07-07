@@ -6,9 +6,16 @@ public class HotelInfoPrintVO {
 	private String hotelGrade;
 	private String roomTypeName;
 	private int maxPeople;
+	private int roomID;
 	
 	
 	
+	public int getRoomID() {
+		return roomID;
+	}
+	public void setRoomID(int roomID) {
+		this.roomID = roomID;
+	}
 	public int getMaxPeople() {
 		return maxPeople;
 	}

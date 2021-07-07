@@ -3,12 +3,33 @@ package hotel.vo;
 public class Reservation1VO {
 	private String userID;
 	private int roomID;
+	private int price;
 	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	private int reservationID;
 	private String checkInDate;
 	private String checkOutDate;
 	private int guestCount;
+	private int payTypeID;
+	private String payTypeName;
 	
+	public int getPayTypeID() {
+		return payTypeID;
+	}
+	public void setPayTypeID(int payTypeID) {
+		this.payTypeID = payTypeID;
+	}
+	public String getPayTypeName() {
+		return payTypeName;
+	}
+	public void setPayTypeName(String payTypeName) {
+		this.payTypeName = payTypeName;
+	}
 	public int getReservationID() {
 		return reservationID;
 	}
@@ -47,10 +68,12 @@ public class Reservation1VO {
 	}
 	@Override
 	public String toString() {
-		return "Reservation1VO [userID=" + userID + ", roomID=" + roomID + ", reservationID=" + reservationID
-				+ ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate + ", guestCount=" + guestCount
-				+ "]";
+		return "Reservation1VO [userID=" + userID + ", roomID=" + roomID + ", price=" + price + ", reservationID="
+				+ reservationID + ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate + ", guestCount="
+				+ guestCount + ", payTypeID=" + payTypeID + ", payTypeName=" + payTypeName + "]";
 	}
+	
+
 
 }
 
