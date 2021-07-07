@@ -552,9 +552,13 @@ public class ProjectUI {
 			return;
 		}
 		r1vo_presentChar = list.get(num - 1);
-
-		pay(r1vo_presentChar);
-
+		if(r1vo_presentChar.getPayStatus().contentEquals("결제완료")) {
+			System.out.println("이미 결제 하신 상품입니다");
+			return;
+		}
+		else {
+			pay(r1vo_presentChar);
+		}
 	}
 	
 	public void pay(Reservation1VO r1vo_presentChar) {
@@ -568,14 +572,6 @@ public class ProjectUI {
 		System.out.print("선택 > ");
 		int menu = scannerInput.nextInt();
 		
-		
-		
-		if(cnt!=0) {
-			System.out.println("결제가 생성되었습니다");
-		}else {
-			System.out.println("결제 생성에 실패했습니다");
-		}
-	  
 		switch (menu) {
 		case 1:
 			System.out.println("예약 완료되었습니다. 당일 호텔에서 지불해주세요 !!");
@@ -591,10 +587,10 @@ public class ProjectUI {
 				
 				int reservationID=r1vo_presentChar.getReservationID();
 				String payStatus=r1vo_presentChar.getPayStatus();
-				String payDay="2021-05-15";
+//				String payDay="2021-05-15";
 				int payTypeID=1;
 				
-				PayVO vo=new PayVO(reservationID,payDay,payTypeID,payStatus);
+				PayVO vo=new PayVO(reservationID,payTypeID,payStatus);
 			
 				System.out.println("pay에 vo"+vo);
 				
@@ -603,7 +599,8 @@ public class ProjectUI {
 				
 				if(cnt!=0) {
 					System.out.println("카드 결제 완료되었습니다.");
-					hotelDAO.payUpdate();
+					hotelDAO.payUpdate(reservationID);
+					payDAO.payUpdate2(reservationID);
 					break;
 				}
 				else {
@@ -615,16 +612,25 @@ public class ProjectUI {
 			case 2:
 				int reservationID1=r1vo_presentChar.getReservationID();
 				String payStatus1=r1vo_presentChar.getPayStatus();
-				String payDay1="10";
+//				String payDay1="10";
 				int payTypeID1=1;
 				
-				PayVO vo1=new PayVO(reservationID1,payDay1,payTypeID1,payStatus1);
+				PayVO vo1=new PayVO(reservationID1,payTypeID1,payStatus1);
 			
 				System.out.println("pay에 vo"+vo1);
 				
 				cnt=payDAO.payInsert(vo1);
-				System.out.println("현금 결제 완료되었습니다.");
-				break;
+				
+				if(cnt!=0) {
+					System.out.println("카드 결제 완료되었습니다.");
+					hotelDAO.payUpdate(reservationID1);
+					payDAO.payUpdate2(reservationID1);
+					break;
+				}
+				else {
+					System.out.println("결제 취소");
+					break;
+				}
 			default:
 				break;
 			}

@@ -11,9 +11,9 @@ public class PayVO {
 	public PayVO() {
 		
 	}
-	public PayVO(int reservationID, String payDay, int payTypeID, String payStatus) {
+	public PayVO(int reservationID, int payTypeID, String payStatus) {
 		this.reservationID=reservationID;
-		this.payDay=payDay;
+//		this.payDay=payDay;
 		this.payTypeID=payTypeID;
 		this.payStatus=payStatus;
 	}

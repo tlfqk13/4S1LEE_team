@@ -26,4 +26,8 @@ public interface HotelMapper {
 
 	public int payInsert(PayVO vo);
 
+	public void payUpdate(int reservationID);
+
+	public void payUpdate2(int reservationID);
+
 }

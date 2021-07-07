@@ -120,4 +120,21 @@ public class HotelDAO {
 
 	}
 
+
+	public void payUpdate(int reservationID) {
+		SqlSession session=null;
+
+		try {
+			session=factory.openSession();
+			HotelMapper mapper=session.getMapper(HotelMapper.class);
+			mapper.payUpdate(reservationID);
+			session.commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally
+		{
+			if(session != null) session.close();
+		}
+	}
 }
+

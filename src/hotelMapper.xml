@@ -128,19 +128,28 @@ where
 <!-- 결제 테이블 입력 -->
 <insert id="payInsert" parameterType="pay">
 insert into pay(
-	payID
-	,reservationID
-	,payDay
-	,payTypeID
-	,payStatus
+   payID
+   ,reservationID
+   ,payTypeID
+   ,payStatus
 )values(
    pay_seq.nextval
    ,#{reservationID}
-   ,#{payDay}
    ,#{payTypeID}
    ,#{payStatus}
    )
 </insert>
+
+<update id="payUpdate" parameterType="int">
+update reservation set payStatus='결제완료'
+where reservationID=#{reservationID}
+</update>
+
+<update id="payUpdate2" parameterType="int">
+update pay set payStatus='결제완료'
+where reservationID=#{reservationID}
+</update>
+
 
 
 </mapper>

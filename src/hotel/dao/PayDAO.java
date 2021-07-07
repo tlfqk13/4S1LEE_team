@@ -50,4 +50,21 @@ public class PayDAO {
 		} 
 		return result;
 	}
+
+	public void payUpdate2(int reservationID) {
+		SqlSession session = null;
+
+		try {
+			session = factory.openSession();
+			HotelMapper mapper = session.getMapper(HotelMapper.class);
+			mapper.payUpdate2(reservationID);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
 }
