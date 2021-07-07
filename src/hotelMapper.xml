@@ -16,6 +16,7 @@ select
 	,t.roomTypeName
 	,t.maxPeople
 	,r.roomID
+	,r.price
 from
 	hotel h, hotelGrade g, RoomType t, Room r
 where
@@ -102,7 +103,7 @@ reservation_seq.nextval
 ,#{checkInDate}
 ,#{checkOutDate}
 ,#{guestCount}
-,5000000
+,0
 ,'결제대기'
 )
 </insert>
@@ -116,7 +117,7 @@ select
     ,r.checkindate
     ,r.checkoutdate
     ,r.payStatus
-    ,r.price
+    ,m.price
 from 
 	Reservation r, room m,hotel h
 where 

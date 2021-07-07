@@ -8,6 +8,8 @@ public class HotelInfoPrintVO {
 	
 	private String roomID;
 	
+	private int price;
+	
 	//test 용도
 	private String hotelCity;
 	
@@ -59,11 +61,17 @@ public class HotelInfoPrintVO {
 		this.roomID = roomID;
 	}
 	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	@Override
 	public String toString() {
 		return "HotelInfoPrintVO [hotelName=" + hotelName + ", hotelAddress=" + hotelAddress + ", hotelGrade="
-				+ hotelGrade + ", roomTypeName=" + roomTypeName + ", hotelCity=" + hotelCity + ", maxPeople="
-				+ maxPeople + "]";
+				+ hotelGrade + ", roomTypeName=" + roomTypeName + ", roomID=" + roomID + ", price=" + price
+				+ ", hotelCity=" + hotelCity + ", maxPeople=" + maxPeople + "]";
 	}
 
 

@@ -464,7 +464,7 @@ public class ProjectUI {
 
 	   public void searchAndReservation() {
 		      String checkInDate,checkOutDate, hotelCity, hotelName,roomType,userID;
-		      int maxPeople, roomID, reservationID;
+		      int maxPeople, roomID, reservationID,roomPrice;
 		      
 		      scannerInput.nextLine();
 		      // TODO Auto-generated method stub
@@ -487,14 +487,15 @@ public class ProjectUI {
 		         
 	
 		      } else {
-		         System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수 \t 룸타입ID");
+		         System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수 \t 룸타입ID \t 가격");
 		         for (HotelInfoPrintVO h1 : list) {
 		            System.out.println(h1.getHotelName() + "\t" 
 		                  + h1.getHotelGrade() + "\t" 
 		                  + h1.getHotelAddress() + "\t"
 		                  + h1.getRoomTypeName()+ "\t"
-		                  +h1.getMaxPeople()+ "\t"
-		            	  +h1.getRoomID());
+		                  + h1.getMaxPeople()+ "\t"
+		            	  + h1.getRoomID()+ "\t"
+		            	  + h1.getPrice());
 		         }
 		         scannerInput.nextLine();
 		         System.out.println("예약하실 룸 타입을 입력하세요");
@@ -510,12 +511,16 @@ public class ProjectUI {
 		         System.out.print("체크아웃 : ");
 		         checkOutDate = scannerInput.nextLine();
 		         
+//		         roomPrice=r1vo_presentChar.getPrice();
+//		         System.out.println("방가격 방가격 "+ roomPrice);
+		         
 		         Reservation1VO hotel1 = new Reservation1VO();
 		         
 		         hotel1.setRoomID(roomID);
 		         hotel1.setCheckInDate(checkInDate);
 		         hotel1.setCheckOutDate(checkOutDate);
 		         hotel1.setUserID(userID);
+//		         hotel1.setPrice(roomPrice);
 //		         hotel1.setGuestCount(maxPeople);
 		         
 		         

@@ -16,7 +16,7 @@ public class Reservation1VO {
 	private String payDay;
 	private String payType;
 	
-	private String price;
+	private int price;
 	
 	public int getReservationID() {
 		return reservationID;
@@ -85,10 +85,10 @@ public class Reservation1VO {
 	public void setHotelName(String hotelName) {
 		this.hotelName = hotelName;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
