@@ -118,7 +118,7 @@ select
    ,r.checkindate
    ,r.checkoutdate
    ,r.payStatus
-   ,r.price
+   ,m.price
     
 from 
    Reservation r, room m,hotel h, userGrade u, homeUser x

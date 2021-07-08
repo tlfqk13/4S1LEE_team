@@ -219,36 +219,36 @@ public class ProjectUI {
 
 	private void userLogin() {
 
-		
-		if(loginCheck()==true) {
-			
-			System.out.println("1 . 호텔");
-			System.out.println("2 . 레저");
-			System.out.println("3 . 교통");
-			System.out.println("4 . 마이 페이지");
-	
-			int selectMenu=scannerInput.nextInt();
-	
-			switch(selectMenu) {
-			case 1:
-				hotel();
-				break;
-				//		case 2:
-				//			leisure();
-				//			break;
-				//		case 3: 
-				//			transport();
-				//			break;
-			case 4:
-				myPage();
-				break;
-			case 0:
-				System.out.println("");
-				break;
-			default: 
-				break;
-			}
+		if (loginCheck() == true) {
 
+			while (true) {
+				System.out.println("1 . 호텔");
+				System.out.println("2 . 레저");
+				System.out.println("3 . 교통");
+				System.out.println("4 . 마이 페이지");
+
+				int selectMenu = scannerInput.nextInt();
+
+				switch (selectMenu) {
+				case 1:
+					hotel();
+					break;
+				// case 2:
+				// leisure();
+				// break;
+				// case 3:
+				// transport();
+				// break;
+				case 4:
+					myPage();
+					break;
+				case 0:
+					System.out.println("");
+					break;
+				default:
+					break;
+				}
+			}
 		}
 
 	}
@@ -610,7 +610,10 @@ public class ProjectUI {
 							+vo.getHotelName()+"\t" 
 							+vo.getCheckInDate()+"\t"
 							+vo.getCheckOutDate()+"\t"
-							+(vo.getPrice()-((eventdiscount*0.01)*vo.getPrice()))+"원"+ "\t" 
+							+(vo.getPrice()-((eventdiscount*0.01)
+									*vo.getPrice())-((vo.getUserDiscount()*0.01)
+									*(vo.getPrice()-((eventdiscount*0.01)*vo.getPrice()))))
+									+"원"+ "\t" 
 							+ vo.getPayStatus() + "\t" 
 							+ vo.getUserID() + "\t");
 		}
