@@ -63,6 +63,7 @@ public class ProjectUI {
 	
 	private PayDAO payDAO=new PayDAO();
 
+	private int eventdiscount=0;
 	
 	private Reservation1VO r1vo_presentChar=null;
 	private int payUserId=0;
@@ -199,7 +200,7 @@ public class ProjectUI {
 		}
 		System.out.println("비밀번호 : ");
 		userPassword=scannerInput.next();
-		homeuserVO=loginManager.loginPasswordCheck(userPassword);
+		homeuserVO=loginManager.loginPasswordCheck(userID,userPassword);
 		if(homeuserVO==null) {
 			System.out.println("비밀번호가 틀렸습니다");
 			System.out.println("비밀번호를 확인하고 다시 입력해 주세요");
@@ -462,75 +463,138 @@ public class ProjectUI {
 
 	}
 
-	   public void searchAndReservation() {
-		      String checkInDate,checkOutDate, hotelCity, hotelName,roomType,userID;
-		      int maxPeople, roomID, reservationID,roomPrice;
-		      
-		      scannerInput.nextLine();
-		      // TODO Auto-generated method stub
-		      System.out.println("검색 및 예약");
-		    
-		      System.out.println("1 . 지역");
-		      hotelCity = scannerInput.nextLine();
-		      System.out.println("2 . 예약 인원 수");
-		      maxPeople = scannerInput.nextInt();
-		 
-		      HotelInfoGetVO h = new HotelInfoGetVO();
-
-		      h.setHotelCity(hotelCity);
-		      h.setMaxPeople(maxPeople);
-		      
-		 
-		      ArrayList<HotelInfoPrintVO> list = hotelManager.hotelsearch(h);
-		      if (list.isEmpty()) {
-		         System.out.println("해당 검색결과가 없습니다");
-		         
+//	   public void searchAndReservation() {
+//		      String checkInDate,checkOutDate, hotelCity, hotelName,roomType,userID;
+//		      int maxPeople, roomID, reservationID,roomPrice;
+//		      
+//		      scannerInput.nextLine();
+//		      // TODO Auto-generated method stub
+//		      System.out.println("검색 및 예약");
+//		    
+//		      System.out.println("1 . 지역");
+//		      hotelCity = scannerInput.nextLine();
+//		      System.out.println("2 . 예약 인원 수");
+//		      maxPeople = scannerInput.nextInt();
+//		 
+//		      HotelInfoGetVO h = new HotelInfoGetVO();
+//
+//		      h.setHotelCity(hotelCity);
+//		      h.setMaxPeople(maxPeople);
+//		      
+//		 
+//		      ArrayList<HotelInfoPrintVO> list = hotelManager.hotelsearch(h);
+//		      if (list.isEmpty()) {
+//		         System.out.println("해당 검색결과가 없습니다");
+//		         
+//	
+//		      } else {
+//		         System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수 \t 룸타입ID \t 가격");
+//		         for (HotelInfoPrintVO h1 : list) {
+//		            System.out.println(h1.getHotelName() + "\t" 
+//		                  + h1.getHotelGrade() + "\t" 
+//		                  + h1.getHotelAddress() + "\t"
+//		                  + h1.getRoomTypeName()+ "\t"
+//		                  + h1.getMaxPeople()+ "\t"
+//		            	  + h1.getRoomID()+ "\t"
+//		            	  + h1.getPrice());
+//		         }
+//		         scannerInput.nextLine();
+//		         System.out.println("예약하실 룸 타입을 입력하세요");
+//		         System.out.print("룸 타입 : ");
+//		         roomType = scannerInput.nextLine();
+////		         System.out.print("유저 아이디 : ");
+//		         userID = test.getUserID();
+//		         System.out.print("룸 아이디 : ");
+//		         roomID = scannerInput.nextInt();
+//		         scannerInput.nextLine();
+//		         System.out.print("체크인 : ");
+//		         checkInDate = scannerInput.nextLine();
+//		         System.out.print("체크아웃 : ");
+//		         checkOutDate = scannerInput.nextLine();
+//		         
+////		         roomPrice=r1vo_presentChar.getPrice();
+////		         System.out.println("방가격 방가격 "+ roomPrice);
+//		         
+//		         Reservation1VO hotel1 = new Reservation1VO();
+//		         
+//		         hotel1.setRoomID(roomID);
+//		         hotel1.setCheckInDate(checkInDate);
+//		         hotel1.setCheckOutDate(checkOutDate);
+//		         hotel1.setUserID(userID);
+////		         hotel1.setPrice(roomPrice);
+////		         hotel1.setGuestCount(maxPeople);
+//		         
+//		         
+//		         System.out.println(hotel1);
+//		         
+//		         int cnt = hotelDAO.insertReservation(hotel1);
+//		         
+//		         reservationCart();
+//		      }
+//		   }
 	
-		      } else {
-		         System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수 \t 룸타입ID \t 가격");
-		         for (HotelInfoPrintVO h1 : list) {
-		            System.out.println(h1.getHotelName() + "\t" 
-		                  + h1.getHotelGrade() + "\t" 
-		                  + h1.getHotelAddress() + "\t"
-		                  + h1.getRoomTypeName()+ "\t"
-		                  + h1.getMaxPeople()+ "\t"
-		            	  + h1.getRoomID()+ "\t"
-		            	  + h1.getPrice());
-		         }
-		         scannerInput.nextLine();
-		         System.out.println("예약하실 룸 타입을 입력하세요");
-		         System.out.print("룸 타입 : ");
-		         roomType = scannerInput.nextLine();
-//		         System.out.print("유저 아이디 : ");
-		         userID = test.getUserID();
-		         System.out.print("룸 아이디 : ");
-		         roomID = scannerInput.nextInt();
-		         scannerInput.nextLine();
-		         System.out.print("체크인 : ");
-		         checkInDate = scannerInput.nextLine();
-		         System.out.print("체크아웃 : ");
-		         checkOutDate = scannerInput.nextLine();
-		         
-//		         roomPrice=r1vo_presentChar.getPrice();
-//		         System.out.println("방가격 방가격 "+ roomPrice);
-		         
-		         Reservation1VO hotel1 = new Reservation1VO();
-		         
-		         hotel1.setRoomID(roomID);
-		         hotel1.setCheckInDate(checkInDate);
-		         hotel1.setCheckOutDate(checkOutDate);
-		         hotel1.setUserID(userID);
-//		         hotel1.setPrice(roomPrice);
-//		         hotel1.setGuestCount(maxPeople);
-		         
-		         
-		         System.out.println(hotel1);
-		         
-		         int cnt = hotelDAO.insertReservation(hotel1);
-		         
-		         reservationCart();
-		      }
-		   }
+	public void searchAndReservation() {
+		String checkInDate, checkOutDate, hotelCity, hotelName, roomType, userID;
+		int maxPeople, roomID, reservationID;
+
+		scannerInput.nextLine();
+		// TODO Auto-generated method stub
+		System.out.println("검색 및 예약");
+
+		System.out.println("1 . 지역");
+		hotelCity = scannerInput.nextLine();
+		System.out.println("2 . 예약 인원 수");
+		maxPeople = scannerInput.nextInt();
+
+		HotelInfoGetVO h = new HotelInfoGetVO();
+
+		h.setHotelCity(hotelCity);
+		h.setMaxPeople(maxPeople);
+
+		ArrayList<HotelInfoPrintVO> list = hotelManager.hotelsearch(h);
+		if (list.isEmpty()) {
+			System.out.println("해당 검색결과가 없습니다");
+
+		} else {
+			System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수 \t 룸타입ID");
+			for (HotelInfoPrintVO h1 : list) {
+				System.out.println(h1.getHotelName() + "\t" + h1.getHotelGrade() + "\t" + h1.getHotelAddress() + "\t"
+						+ h1.getRoomTypeName() + "\t" + h1.getMaxPeople() + "\t" + h1.getRoomID());
+			}
+
+			try {
+				scannerInput.nextLine();
+				System.out.println("예약하실 룸 타입을 입력하세요");
+				System.out.print("룸 타입 : ");
+				roomType = scannerInput.nextLine();
+//              System.out.print("유저 아이디 : ");
+				userID = test.getUserID();
+				System.out.print("룸 아이디 : ");
+				roomID = scannerInput.nextInt();
+				scannerInput.nextLine();
+				System.out.print("체크인 : ");
+				checkInDate = scannerInput.nextLine();
+				System.out.print("체크아웃 : ");
+				checkOutDate = scannerInput.nextLine();
+
+				Reservation1VO hotel1 = new Reservation1VO();
+
+				hotel1.setRoomID(roomID);
+				hotel1.setCheckInDate(checkInDate);
+				hotel1.setCheckOutDate(checkOutDate);
+				hotel1.setUserID(userID);
+//            hotel1.setGuestCount(maxPeople);
+
+				System.out.println(hotel1);
+
+				int cnt = hotelDAO.insertReservation(hotel1);
+
+				reservationCart();
+			} catch (Exception e) {
+				System.out.println("다시 입력하세요");
+			}
+		}
+	}
 	   
 	public void reservationCart() {
 		
@@ -546,7 +610,7 @@ public class ProjectUI {
 							+vo.getHotelName()+"\t" 
 							+vo.getCheckInDate()+"\t"
 							+vo.getCheckOutDate()+"\t"
-							+ vo.getPrice()+"원"+ "\t" 
+							+(vo.getPrice()-((eventdiscount*0.01)))+"원"+ "\t" 
 							+ vo.getPayStatus() + "\t" 
 							+ vo.getUserID() + "\t");
 		}
@@ -661,8 +725,14 @@ public class ProjectUI {
 		} else {
 			System.out.println("이벤트 제목 \t 이벤트 내용\t 이벤트 시작일\t 이벤트 종료일\t 할인 금액");
 			for (HotelEventVO e : list) {
-				System.out.println(e.getEventTitle() + " \t " + e.getEventContent() + "\t" + e.getStartDate() + "\t"
-						+ e.getEndDate() + "\t" + e.getDiscount());
+				System.out.println(e.getEventTitle() + " \t " 
+						+ e.getEventContent() + "\t" 
+						+ e.getStartDate() + "\t"
+						+ e.getEndDate() + "\t" 
+						+ e.geteventDiscount());
+				
+				eventdiscount = e.geteventDiscount();	
+				System.out.println(eventdiscount);
 			}
 		}
 	}
@@ -677,7 +747,7 @@ public class ProjectUI {
 			System.out.println("이벤트 제목 \t 이벤트 내용\t 이벤트 시작일\t 이벤트 종료일\t 할인 금액");
 			for (HotelEventVO e : list) {
 				System.out.println(e.getEventTitle() + " \t " + e.getEventContent() + "\t" + e.getStartDate() + "\t"
-						+ e.getEndDate() + "\t" + e.getDiscount());
+						+ e.getEndDate() + "\t" + e.geteventDiscount());
 			}
 		}
 	}

@@ -5,7 +5,7 @@ public class HotelEventVO {
  private String eventContent;
  private String startDate;
  private String endDate;
- private int discount;
+ private int eventDiscount;
  
  
 public String getEventTitle() {
@@ -32,12 +32,11 @@ public String getEndDate() {
 public void setEndDate(String endDate) {
 	this.endDate = endDate;
 }
-public int getDiscount() {
-	return discount;
+public int geteventDiscount() {
+	return eventDiscount;
 }
-public void setDiscount(int discount) {
-	this.discount = discount;
+public void seteventDiscount(int discount) {
+	this.eventDiscount = discount;
 }
-	
-	
+
 }

@@ -18,6 +18,8 @@ public class Reservation1VO {
 	
 	private int price;
 	
+	private int userDiscount;
+	
 	public int getReservationID() {
 		return reservationID;
 	}
@@ -90,6 +92,12 @@ public class Reservation1VO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public int getUserDiscount() {
+		return userDiscount;
+	}
+	public void setUserDiscount(int userDiscount) {
+		this.userDiscount = userDiscount;
 	}
 
 }

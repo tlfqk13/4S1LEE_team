@@ -17,7 +17,8 @@ where
 select * from HomeUser
 
 where 
-	userPassword=#{userPassword}
+	userID=#{userID} 
+	and userPassword=#{userPassword}
 	
 </select>
 

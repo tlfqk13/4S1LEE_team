@@ -39,7 +39,7 @@ select
 	,eventcontent
 	,startdate
 	,enddate
-	,discount
+	,eventdiscount
 from 
 	event
 where
@@ -103,7 +103,7 @@ reservation_seq.nextval
 ,#{checkInDate}
 ,#{checkOutDate}
 ,#{guestCount}
-,0
+,30000
 ,'결제대기'
 )
 </insert>
@@ -111,17 +111,19 @@ reservation_seq.nextval
 <select id="reservation1voList" resultType="Reservation1vo">
 
 select 
-	r.reservationID
-	,r.userID
-    ,h.hotelname
-    ,r.checkindate
-    ,r.checkoutdate
-    ,r.payStatus
-    ,m.price
+   r.reservationID
+   ,r.userID
+   ,u.userdiscount
+   ,h.hotelname
+   ,r.checkindate
+   ,r.checkoutdate
+   ,r.payStatus
+   ,r.price
+    
 from 
-	Reservation r, room m,hotel h
+   Reservation r, room m,hotel h, userGrade u, homeUser x
 where 
-    userID=#{userID} and m.roomID=r.roomID and m.hotelID=h.hotelID
+    x.userID=#{userID} and m.roomID=r.roomID and m.hotelID=h.hotelID and u.userGradeID = x.userGradeID
 
 </select>
 
