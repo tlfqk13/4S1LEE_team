@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hotel.dao.HotelMapper">
+
+
+<!-- 전체 출력 -->
+<select id="hotelsearch" parameterType="hotelInfoGet" resultType="hotelInfoPrint">
+
+select 
+	h.hotelName 
+	,h.hotelAddress
+	,g.hotelGrade
+	,t.roomTypeName
+	,t.maxPeople
+from
+	hotel h, hotelGrade g, RoomType t, Room r
+where
+	h.hotelGradeID=g.hotelgradeID 
+and
+	r.roomTypeID=t.roomTypeID 
+and
+	h.hotelID = r.hotelID 
+and
+	h.hotelCity = #{hotelCity} 
+and
+	t.maxPeople >= #{maxPeople} 
+
+</select>
+
+<select id="ongoingEvent" resultType="HotelEvent" parameterType="String">
+<![CDATA[
+select 
+	eventTitle
+	,eventcontent
+	,startdate
+	,enddate
+	,discount
+from 
+	event
+where
+	startdate <= #{today}
+and 
+	enddate >= #{today}
+]]>
+
+</select>
+
+<select id="printAllEvent" resultType="HotelEvent">
+
+select 
+	eventTitle
+	,eventcontent
+	,startdate
+	,enddate
+	,discount
+from 
+	event
+
+
+</select>
+
+
+<!-- 호텔명으로 출력 -->
+<select id="selectByHotel" parameterType="String" resultType="hotelInfoGet">
+select
+	h.hotelName
+	,h.hotelAddress
+	,g.hotelGrade
+	,t.roomTypeName
+    ,t.maxPeople
+from
+    hotel h, hotelGrade g, RoomType t, Room r, Reservation rv
+where
+    h.hotelGradeID=g.hotelgradeID
+and
+    r.roomTypeID=t.roomTypeID
+and 
+    h.hotelID = r.hotelID
+and 
+    r.roomid = rv.roomid
+and
+    h.hotelName = #{hotelName}
+</select>
+
+<!-- 예약 -->
+<insert id="insertReservation" parameterType="Reservation">
+insert into Reservation(
+reservationID
+,roomID
+,userID
+,checkInDate
+,checkOutDate
+,guestCount
+)values(
+reservation_seq.nextval
+,#{roomID}
+,#{userID}
+,#{checkInDate}
+,#{checkOutDate}
+,#{guestCount}
+)
+</insert>
+
+
+</mapper>
