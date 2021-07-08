@@ -610,7 +610,7 @@ public class ProjectUI {
 							+vo.getHotelName()+"\t" 
 							+vo.getCheckInDate()+"\t"
 							+vo.getCheckOutDate()+"\t"
-							+(vo.getPrice()-((eventdiscount*0.01)))+"원"+ "\t" 
+							+(vo.getPrice()-((eventdiscount*0.01)*vo.getPrice()))+"원"+ "\t" 
 							+ vo.getPayStatus() + "\t" 
 							+ vo.getUserID() + "\t");
 		}
