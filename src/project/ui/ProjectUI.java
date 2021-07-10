@@ -42,7 +42,7 @@ import project.mgr.signUpManager;
 // 유저 로그인이나 관리자 로그인 메서드 자료형이 void로 되어 있는데
 // 리턴이 있게 하려고 했기 때문에 수정하여야 함.
 //..
->>>>>>> refs/heads/Lee
+
 
 // 깃허브 자기 브랜치에서 작업하기 
 // 자기 브랜치에서 작업하다가 내가 작업한거 master 브랜치로 merge 하고 싶을때는 
@@ -254,13 +254,11 @@ public class ProjectUI {
 				System.out.println("2 . 레저");
 				System.out.println("3 . 교통");
 				System.out.println("4 . 마이 페이지");
-
+				System.out.println("5 . 로그 아웃");
 
 				int selectMenu = scannerInput.nextInt();
 
 				switch (selectMenu) {
-
-				System.out.println("5 . 로그 아웃");
 
 				case 1:
 					hotel();
@@ -584,8 +582,14 @@ public class ProjectUI {
 			if(checkedResult == false) {
 				System.out.println("비밀번호가 잘못입력되었습니다.");
 			}else{
+				int paydeleteResult=myPageManager.payDelete(reservationID);
 				int deleteResult = myPageManager.reservationDelete(reservationID);
 				
+				if(paydeleteResult==0) {
+					System.out.println("예약취소 실패");
+				} else {
+					System.out.println("예약취소 성공");
+				}
 				if(deleteResult == 0) {
 					System.out.println("예약취소 실패");
 				}else {
@@ -630,25 +634,19 @@ public class ProjectUI {
 	public void searchAndReservation() {
 		String checkInDate, checkOutDate, hotelCity, hotelName, roomType, userID;
 		int maxPeople, roomID, reservationID;
-
 		scannerInput.nextLine();
 		// TODO Auto-generated method stub
 		System.out.println("검색 및 예약");
-
 		System.out.println("1 . 지역");
 		hotelCity = scannerInput.nextLine();
 		System.out.println("2 . 예약 인원 수");
 		maxPeople = scannerInput.nextInt();
-
 		HotelInfoGetVO h = new HotelInfoGetVO();
-
 		h.setHotelCity(hotelCity);
 		h.setMaxPeople(maxPeople);
-
 		ArrayList<HotelInfoPrintVO> list = hotelManager.hotelsearch(h);
 		if (list.isEmpty()) {
 			System.out.println("해당 검색결과가 없습니다");
-
 		} else {
 			System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수 \t 룸타입ID");
 			for (HotelInfoPrintVO h1 : list) {
@@ -669,67 +667,22 @@ public class ProjectUI {
 				checkInDate = scannerInput.nextLine();
 				System.out.print("체크아웃 : ");
 				checkOutDate = scannerInput.nextLine();
-
-			if(cnt > 0) {
-
-				System.out.println("<결제 수단 선택>");
-				System.out.println("1. 현장 결제");
-				System.out.println("2. 선 결제");
-
 				Reservation1VO hotel1 = new Reservation1VO();
-
 				hotel1.setRoomID(roomID);
 				hotel1.setCheckInDate(checkInDate);
 				hotel1.setCheckOutDate(checkOutDate);
 				hotel1.setUserID(userID);
 //            hotel1.setGuestCount(maxPeople);
-
 				System.out.println(hotel1);
-
 				int cnt = hotelDAO.insertReservation(hotel1);
-
 				reservationCart();
 			} catch (Exception e) {
 				System.out.println("다시 입력하세요");
-
-				System.out.print("선택 > ");
-				int menu = scannerInput.nextInt();
-
-
-				switch (menu) {
-				case 1:
-					System.out.println("결제 완료되었습니다.");
-					break;
-				case 2:
-					System.out.println("<선 결제>");
-					System.out.println("1. 신용카드");
-					System.out.println("2. 무통장 입금");
-					System.out.print("선택 > ");
-					int key = scannerInput.nextInt();
-					switch (key) {
-					case 1:
-
-						System.out.println("결제 완료되었습니다.");
-						break;
-					case 2:
-						System.out.println("결제 완료되었습니다.");
-						break;
-					default:
-						break;
-					}
-					break;
-				default:
-					break;
-				}
-
-			} else {
-				System.out.println("예약 실패했습니다.");
-
->>>>>>> refs/heads/Lee
 			}
 		}
 	}
 	   
+
 	public void reservationCart() {
 		
 		List<Reservation1VO> list = payManger.payList(test.getUserID());

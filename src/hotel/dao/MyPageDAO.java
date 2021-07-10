@@ -158,5 +158,14 @@ public class MyPageDAO {
 		return list;
 	}
 
+	public int payDelete(int reservationID) {
+		SqlSession session = factory.openSession();
+		MyPageMapper mapper = session.getMapper(MyPageMapper.class);
+		
+		int result = mapper.payDelete(reservationID);
+		session.commit();
+		return result;
+	}
+
 }
 

@@ -13,6 +13,14 @@ where
 	reservationID = #{reservationID}
 </delete>
 
+<delete id="payDelete" parameterType="int">
+delete 
+from
+	pay
+where 
+	reservationID = #{reservationID}
+</delete>
+
 <select id="reservationList" parameterType="String" resultType="Reservation">
 select 
 	reservationID
