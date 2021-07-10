@@ -1,3 +1,4 @@
+
 package hotel.dao;
 
 import java.util.ArrayList;
@@ -59,6 +60,4 @@ public class signUpDAO {
 		}
 		return homeUserVO;
 	}
-
-
 }

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
-import admin.vo.AdminManager;
 import admin.vo.AdminVO;
 import hotel.dao.HotelDAO;
 import hotel.dao.PayDAO;
@@ -18,40 +18,57 @@ import hotel.vo.HotelInfoPrintVO;
 import hotel.vo.PayVO;
 import hotel.vo.Reservation1VO;
 import hotel.vo.ReservationVO;
-import myPage.vo.MyPageVO;
 import myPage.vo.HomeUserVO;
+import myPage.vo.MyPageVO;
+import myPage.vo.ReviewBoardVO;
+import myPage.vo.SearchHotelNameVO;
+import myPage.vo.ShowRooomTypeVO;
+import myPage.vo.UnBookingRoomVO;
+import myPage.vo.UseableRoomListSrcVO;
+import project.mgr.AdminManager;
 import project.mgr.HotelManager;
 import project.mgr.MyPageManager;
+
 import project.mgr.PayManager;
 import project.mgr.signUpManager;
+
 import project.mgr.loginManager;
 
 
+import project.mgr.signUpManager;
+
+//------------------------------------------------------------//
+// 코딩 작성 전에 읽어보기 
+// 유저 로그인이나 관리자 로그인 메서드 자료형이 void로 되어 있는데
+// 리턴이 있게 하려고 했기 때문에 수정하여야 함.
+//..
+>>>>>>> refs/heads/Lee
 
 // 깃허브 자기 브랜치에서 작업하기 
 // 자기 브랜치에서 작업하다가 내가 작업한거 master 브랜치로 merge 하고 싶을때는 
 // 무조건 "손동규"에게 물어보고 나머지 팀원들에게 master랑 merge한다고 알리고 하기
-
-//2021/07/05-- 유저 로그인 회원가입 관리자 로그인까지 완성
 //------------------------------------------------------------//
+// 현경 다시 돌아왔다 암 컴
+// 이거 바로 전 커밋 푸쉬,, 뭔가 이상함 
 
 
 public class ProjectUI {
-	
-	private Scanner scannerInput = new Scanner(System.in);
-	boolean loginCheck=true;
-	
-	signUpManager signUpManager = new signUpManager();
-	
-	loginManager loginManager = new loginManager();
-	
-	AdminManager admingManager=new AdminManager();
-	
-	PayManager payManger = new PayManager();
-	
+	public Scanner scannerInput = new Scanner(System.in);
 	MyPageManager myPageManager = new MyPageManager();
+
+	signUpManager signUpManager = new signUpManager();
+	loginManager loginManager = new loginManager();
+	AdminManager admingManager=new AdminManager();
+
+	PayManager payManger = new PayManager();
+
 	private HotelManager hotelManager = new HotelManager();
+
 	
+	boolean loginCheck=true;
+	private static String rememberUsesrid;
+	private static String rememberUsesrpwd;
+
 	HomeUserVO user = new HomeUserVO();
 	private HomeUserVO test=null;
 	
@@ -71,6 +88,7 @@ public class ProjectUI {
 	
 
 	public ProjectUI() {
+
 		boolean run=true;
 		while(run) {
 			printMainMenu();
@@ -98,17 +116,19 @@ public class ProjectUI {
 
 	public void adminLogin() {
 		System.out.println("관리자 로그인");
-		
-//		  managerNumber         
-//		  managerPassword     
-//		  managerID           
+
+		//		  managerNumber         
+		//		  managerPassword     
+		//		  managerID           
 		String managerID,managerPassword;
-		
+
 		System.out.println(" 아이디 : ");
 		managerID=scannerInput.next();
 		System.out.println(" 비밀번호 : ");
 		managerPassword=scannerInput.next();
-		
+
+
+
 		AdminVO adminVO=admingManager.adminLogin(managerID,managerPassword);
 		if(adminVO==null) {
 			System.out.println("관리자 아이디와 비밀번호를 올바르게 입력하세요 !!");
@@ -130,15 +150,16 @@ public class ProjectUI {
 	}
 
 
+
 	private void signUp() {
-		
+
 		System.out.println("< 회원 가입> ");
-		
+
 		String userId,userPassword,userPassword2,userEmail,userName,userBirth,userPhone;
 		int signUpCheck=0;
 		System.out.println("1 . 사용하실 ID 를 입력해주세요:s ");
 		userId=scannerInput.next();
-		
+
 		HomeUserVO homeUserVO=signUpManager.idDoubleCheck(userId);
 		if(homeUserVO!=null) {
 			System.out.println("이미 사용중인 아이디입니다");
@@ -146,28 +167,28 @@ public class ProjectUI {
 			signUp();
 			return;
 		}
-		
+
 		System.out.println("2 . 사용하실 비밀번호를 입력해주세요 : ");
 		userPassword=scannerInput.next();
 		System.out.println("2 . 비밀번호를 한번 더 입력해주세요 : ");
 		userPassword2=scannerInput.next();
-		
+
 		System.out.println("3. 이메일을 입력해주세요 : ");
 		userEmail=scannerInput.next();
 		System.out.println("4. 이름을 입력해주세요 : ");
 		userName=scannerInput.next();
 		System.out.println("5. 생일을 입력해주세요 : ");
 		userBirth=scannerInput.next();
-		
-		
+
+
 		if(userPassword.equals(userPassword2)) {
 			System.out.println("6. 본인 인증을 위해 휴대폰 번호를 입력해주세요 : ");
 			userPhone=scannerInput.next();
-			
-			HomeUserVO homeUserVO1=new HomeUserVO(userId,userPassword,userEmail,userPhone,userName,userBirth);
-		
+
+			HomeUserVO homeUserVO1 = new HomeUserVO(userId,userPassword,userEmail,userPhone,userName,userBirth);
+
 			signUpCheck=signUpManager.signUp(homeUserVO1);
-			
+
 			if(signUpCheck==0) {
 				System.out.println("가입 실패입니다");
 			}
@@ -180,18 +201,19 @@ public class ProjectUI {
 			signUp();
 		}	
 	}
-	
+
+
 	private boolean loginCheck() {
-	
+
 		String userID, userPassword;
 		System.out.println("1 . 아이디 : ");
 		userID=scannerInput.next();
-		
+
 		// 로그인 확인하는 메서드
 		// 디비에 가서 아이디랑 비번 비교해서 통과되면 넘김 
 
 		HomeUserVO homeuserVO = loginManager.loginIdCheck(userID); //DB 에서 로그인 검사
-		
+
 		if(homeuserVO==null) {
 			System.out.println("해당 아이디의 회원이 없습니다");
 			System.out.println("아이디를 확인하고 다시 입력해 주세요");
@@ -207,10 +229,14 @@ public class ProjectUI {
 			loginCheck=false;
 		}
 		else {
+			rememberUsesrid = userID;
+			rememberUsesrpwd = userPassword;
 			loginCheck=true;
+
 			System.out.println("아이디 테스트 "+ homeuserVO.getUserID());
 			test=homeuserVO;
 			System.out.println("아이디 테스트 "+ test.getUserID());
+
 		}
 		return loginCheck;
 	}
@@ -219,17 +245,23 @@ public class ProjectUI {
 
 	private void userLogin() {
 
-		if (loginCheck() == true) {
 
-			while (true) {
+		if(loginCheck()==true) {
+			
+			while(true) {
+
 				System.out.println("1 . 호텔");
 				System.out.println("2 . 레저");
 				System.out.println("3 . 교통");
 				System.out.println("4 . 마이 페이지");
 
+
 				int selectMenu = scannerInput.nextInt();
 
 				switch (selectMenu) {
+
+				System.out.println("5 . 로그 아웃");
+
 				case 1:
 					hotel();
 					break;
@@ -299,19 +331,43 @@ public class ProjectUI {
 		String userPassword = scannerInput.next();
 
 		boolean result=false;
-
-		if(userPassword.equals(user.getUserPassword())) {
+		
+		if(userPassword.equals(rememberUsesrpwd)) {
 			result = true; 
-			return result;
-		}else {
-			return result;
 		}
-
+		
+		return result;
 	}
 
 	public void deleteAccount() {
-		// TODO Auto-generated method stub
 		System.out.println("회원 탈퇴하기");
+
+		System.out.println("회원 탈퇴하기"); 
+
+		boolean check = checkOneByPwd();
+		if(check == false) {
+			System.out.println(" 비밀번호가 틀렸습니다. ");
+			checkOneByPwd();
+		}
+
+		scannerInput.nextLine();
+
+		System.out.println(" 아이디를 입력하세요 ");
+		System.out.print(" 아이디 : ");
+		String userID = scannerInput.nextLine();
+		System.out.println(" 비밀번호를 입력하세요 ");
+		System.out.print(" 비밀번호 : ");
+		String userPassword = scannerInput.nextLine();
+
+		HomeUserVO deleteUser = new HomeUserVO(userID, userPassword,null,null,null,null,null);
+
+		boolean checked = myPageManager.deleteAccount(deleteUser);
+
+		if(checked) {
+			System.out.println(" 회원 탈퇴 성공");
+		}else {
+			System.out.println(" 회원 탈퇴 실패");
+		}
 	}
 
 	public void reservationList() {
@@ -320,21 +376,70 @@ public class ProjectUI {
 		//String userid = user.getUserID();
 //		System.out.println("아이디 입력");
 //		String userid = scannerInput.next();
-		List<ReservationVO> list = myPageManager.reservationList(test.getUserID());
 		
-		for(int i=0;i<list.size();i++) {
-			System.out.println(list.get(i));
+			String userid = rememberUsesrid;
+			List<ReservationVO> list = myPageManager.reservationList(userid);
+			if (list == null || list.size() == 0) {
+				System.out.println("예약 내역이 없습니다.");
+			}
+			for (ReservationVO r : list) {
+				System.out.println(r);
+
+			}
 		}
-	
-	}
 
 	public void reviewList() {
 		System.out.println("후기 내역");
+		List<ReviewBoardVO> list1 = myPageManager.reviewList();
+
+		if(list1.isEmpty()) {
+			System.out.println("작성된 후기가 없습니다.");
+		}else {
+			for(ReviewBoardVO reviewList : list1) {
+				System.out.println(reviewList);
+			}
+		}
 
 	}
 
 	public void userInfoUpdate() {
 		System.out.println("개인정보 수정");
+		System.out.println("개인정보 수정");
+		boolean pwdCheack = checkOneByPwd();
+		if(pwdCheack == false) {
+			System.out.println(" 비밀번호가 틀렸습니다. ");
+			checkOneByPwd();
+		}
+
+		scannerInput.nextLine();
+
+		System.out.println("새로운 정보 입력");
+		System.out.println("변경할 부분만 입력");
+		System.out.print("비밀번호 변경 : ");
+		String userPassword = scannerInput.nextLine();
+		System.out.println("메일은 메일 형식을 준수하세요");
+		System.out.print("메일주소 변경 :");
+		String userEmail = scannerInput.nextLine();
+		System.out.println("전화번호 변경 :");
+		String userPhone = scannerInput.nextLine();
+
+		//"" <<??
+		boolean mailCheck = Pattern.matches("\\w+@\\w+\\.\\w+(\\.\\w+)?", userEmail) || userEmail.isEmpty();
+
+		HomeUserVO userInfoUpdate = new HomeUserVO();
+
+		if(mailCheck) {
+			userInfoUpdate = new HomeUserVO(null,userPassword, userEmail, userPhone,null,null,null);
+		} else {
+			System.out.println("메일은 메일 형식을 준수하세요");
+			return;
+		}
+
+		if(myPageManager.userInfoUpdate(userInfoUpdate)) {
+			System.out.println("정보 수정 완료");
+		} else {
+			System.out.println("정보 수정 실패");
+		}
 
 	}
 
@@ -362,8 +467,8 @@ public class ProjectUI {
 	public void reservationUpdate() {
 		System.out.println("예약 변경");
 
-		System.out.println("1 . 날짜 수정");
-		System.out.println("2 . 룸 타입 수정");
+		System.out.println("1 . 룸 타입 수정");
+		System.out.println("2 . 날짜 수정");
 
 		int selectMenu=scannerInput.nextInt();
 		switch(selectMenu) {
@@ -384,34 +489,89 @@ public class ProjectUI {
 
 	public void updateDate() {
 		System.out.println("일정 날짜 변경");
-		System.out.println("");
-		
+
 		System.out.print("예약번호를 입력해주세요 : ");
 		int reservationid = scannerInput.nextInt(); 
 		ReservationVO BeforeChange = myPageManager.selectOneReservation(reservationid);
 		System.out.println("현재 예약 내역");
 		System.out.println(BeforeChange);
+
+		System.out.println("변경하실 날짜를 입력해 주세요 ");
+		System.out.print("체크인 날짜 : ");
+		String checkInDate= scannerInput.next(); 
+		System.out.print("체크아웃 날짜 : ");
+		String checkOutDate = scannerInput.next(); 
+
+		ReservationVO changeDate = new ReservationVO(reservationid,0,null,checkInDate,checkOutDate,0);
+		int result = myPageManager.reservationUpdateChangeDate(changeDate);
+
+		if(result ==1) {
+			System.out.println("예약성공");
+		}else {
+			System.out.println("예약 실패 ");
+		}
+
 
 	}
 
 	public void updateRoomType() {
 		System.out.println("룸타입 변경");
 		System.out.println("");
-		
+
 		System.out.print("예약번호를 입력해주세요 : ");
 		int reservationid = scannerInput.nextInt(); 
 		ReservationVO BeforeChange = myPageManager.selectOneReservation(reservationid);
 		System.out.println("현재 예약 내역");
 		System.out.println(BeforeChange);
-		
-		
-		
- 
+
+		int roomID = BeforeChange.getRoomID();
+
+		//호텔 이름 추출하기
+		SearchHotelNameVO hotelNameOne =  myPageManager.searchHotelName(roomID);
+		String hotelName = hotelNameOne.getHotelName();
+
+		List<ShowRooomTypeVO> list = myPageManager.showAvailableRoomByType(hotelName);
+		//예약가능한 룸타입 출력(객실등급 선택 -> 룸 자동배정)
+		System.out.println("예약 가능한 방 목록");
+		for(ShowRooomTypeVO r : list){
+			System.out.println(r);
+		}
+
+		System.out.println("==========================================");
+		System.out.println("변경할 룸타입 입력 ");
+		String changedRoomType = scannerInput.next();
+
+		//호텔,변경할 룸타입을 가지고 불러온 객실 리스트 
+		UseableRoomListSrcVO roomListSrc = new UseableRoomListSrcVO(changedRoomType,hotelName);
+		List<UnBookingRoomVO> useableRoom = myPageManager.useableRoom(roomListSrc);
+
+		if(useableRoom.size()==0|| useableRoom == null) {
+			System.out.println("변경 실패.");
+		}
+
+		//예약 리스트 전체목록 
+		List<ReservationVO> reservationListAll = myPageManager.reservationListAll();
+		//객실 리스트에서 예약된 방이 있는지 조회하기 
+		int newRoomID =0;
+		for(int i= 0; i < useableRoom.size() ; i++) {
+			for(int j=0; j<reservationListAll.size();j++) {
+				if( useableRoom.get(i).getRoomid() !=reservationListAll.get(j).getRoomID()) {
+					newRoomID = useableRoom.get(i).getRoomid();
+				}
+			}
+		}
+
+		ReservationVO update = new ReservationVO(reservationid,newRoomID,null,null,null,0);
+		int result = myPageManager.reservationUpdateChangeRoomType(update);
+		if (result ==1) {
+			System.out.println("예약 변경성공");
+		}else {
+			System.out.println("변경 실패");
+		}
 	}
 
 	public void reservationDelete() {
 
-		while(true) {
 			System.out.println("예약 취소");
 			System.out.println("1. 삭제할 예약번호 입력");
 
@@ -423,14 +583,17 @@ public class ProjectUI {
 
 			if(checkedResult == false) {
 				System.out.println("비밀번호가 잘못입력되었습니다.");
-				break;
 			}else{
 				int deleteResult = myPageManager.reservationDelete(reservationID);
+				
+				if(deleteResult == 0) {
+					System.out.println("예약취소 실패");
+				}else {
+					System.out.println("예약취소 성공");
+				}
 			}
 		}
 
-
-	}
 
 	public void hotel() {
 		// TODO Auto-generated method stub
@@ -463,75 +626,6 @@ public class ProjectUI {
 
 	}
 
-//	   public void searchAndReservation() {
-//		      String checkInDate,checkOutDate, hotelCity, hotelName,roomType,userID;
-//		      int maxPeople, roomID, reservationID,roomPrice;
-//		      
-//		      scannerInput.nextLine();
-//		      // TODO Auto-generated method stub
-//		      System.out.println("검색 및 예약");
-//		    
-//		      System.out.println("1 . 지역");
-//		      hotelCity = scannerInput.nextLine();
-//		      System.out.println("2 . 예약 인원 수");
-//		      maxPeople = scannerInput.nextInt();
-//		 
-//		      HotelInfoGetVO h = new HotelInfoGetVO();
-//
-//		      h.setHotelCity(hotelCity);
-//		      h.setMaxPeople(maxPeople);
-//		      
-//		 
-//		      ArrayList<HotelInfoPrintVO> list = hotelManager.hotelsearch(h);
-//		      if (list.isEmpty()) {
-//		         System.out.println("해당 검색결과가 없습니다");
-//		         
-//	
-//		      } else {
-//		         System.out.println("호텔 이름 \t 호텔 평점 \t 호텔주소 \t 룸타입 \t 최대 인원수 \t 룸타입ID \t 가격");
-//		         for (HotelInfoPrintVO h1 : list) {
-//		            System.out.println(h1.getHotelName() + "\t" 
-//		                  + h1.getHotelGrade() + "\t" 
-//		                  + h1.getHotelAddress() + "\t"
-//		                  + h1.getRoomTypeName()+ "\t"
-//		                  + h1.getMaxPeople()+ "\t"
-//		            	  + h1.getRoomID()+ "\t"
-//		            	  + h1.getPrice());
-//		         }
-//		         scannerInput.nextLine();
-//		         System.out.println("예약하실 룸 타입을 입력하세요");
-//		         System.out.print("룸 타입 : ");
-//		         roomType = scannerInput.nextLine();
-////		         System.out.print("유저 아이디 : ");
-//		         userID = test.getUserID();
-//		         System.out.print("룸 아이디 : ");
-//		         roomID = scannerInput.nextInt();
-//		         scannerInput.nextLine();
-//		         System.out.print("체크인 : ");
-//		         checkInDate = scannerInput.nextLine();
-//		         System.out.print("체크아웃 : ");
-//		         checkOutDate = scannerInput.nextLine();
-//		         
-////		         roomPrice=r1vo_presentChar.getPrice();
-////		         System.out.println("방가격 방가격 "+ roomPrice);
-//		         
-//		         Reservation1VO hotel1 = new Reservation1VO();
-//		         
-//		         hotel1.setRoomID(roomID);
-//		         hotel1.setCheckInDate(checkInDate);
-//		         hotel1.setCheckOutDate(checkOutDate);
-//		         hotel1.setUserID(userID);
-////		         hotel1.setPrice(roomPrice);
-////		         hotel1.setGuestCount(maxPeople);
-//		         
-//		         
-//		         System.out.println(hotel1);
-//		         
-//		         int cnt = hotelDAO.insertReservation(hotel1);
-//		         
-//		         reservationCart();
-//		      }
-//		   }
 	
 	public void searchAndReservation() {
 		String checkInDate, checkOutDate, hotelCity, hotelName, roomType, userID;
@@ -561,7 +655,6 @@ public class ProjectUI {
 				System.out.println(h1.getHotelName() + "\t" + h1.getHotelGrade() + "\t" + h1.getHotelAddress() + "\t"
 						+ h1.getRoomTypeName() + "\t" + h1.getMaxPeople() + "\t" + h1.getRoomID());
 			}
-
 			try {
 				scannerInput.nextLine();
 				System.out.println("예약하실 룸 타입을 입력하세요");
@@ -576,6 +669,12 @@ public class ProjectUI {
 				checkInDate = scannerInput.nextLine();
 				System.out.print("체크아웃 : ");
 				checkOutDate = scannerInput.nextLine();
+
+			if(cnt > 0) {
+
+				System.out.println("<결제 수단 선택>");
+				System.out.println("1. 현장 결제");
+				System.out.println("2. 선 결제");
 
 				Reservation1VO hotel1 = new Reservation1VO();
 
@@ -592,6 +691,41 @@ public class ProjectUI {
 				reservationCart();
 			} catch (Exception e) {
 				System.out.println("다시 입력하세요");
+
+				System.out.print("선택 > ");
+				int menu = scannerInput.nextInt();
+
+
+				switch (menu) {
+				case 1:
+					System.out.println("결제 완료되었습니다.");
+					break;
+				case 2:
+					System.out.println("<선 결제>");
+					System.out.println("1. 신용카드");
+					System.out.println("2. 무통장 입금");
+					System.out.print("선택 > ");
+					int key = scannerInput.nextInt();
+					switch (key) {
+					case 1:
+
+						System.out.println("결제 완료되었습니다.");
+						break;
+					case 2:
+						System.out.println("결제 완료되었습니다.");
+						break;
+					default:
+						break;
+					}
+					break;
+				default:
+					break;
+				}
+
+			} else {
+				System.out.println("예약 실패했습니다.");
+
+>>>>>>> refs/heads/Lee
 			}
 		}
 	}

@@ -8,6 +8,17 @@ public class AdminVO {
 	public AdminVO() {
 		
 	}
+	
+	
+
+	public AdminVO(int managerNumber, String managerPassword, String managerID) {
+		super();
+		this.managerNumber = managerNumber;
+		this.managerPassword = managerPassword;
+		this.managerID = managerID;
+	}
+
+
 
 	public int getManagerNumber() {
 		return managerNumber;

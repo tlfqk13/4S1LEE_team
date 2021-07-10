@@ -10,6 +10,19 @@ public class PayVO {
 	public PayVO() {
 		
 	}
+	
+	
+
+	public PayVO(int payID, int reservationID, String payDay, String payType, String payStatus) {
+		super();
+		this.payID = payID;
+		this.reservationID = reservationID;
+		this.payDay = payDay;
+		this.payType = payType;
+		this.payStatus = payStatus;
+	}
+
+
 
 	public int getPayID() {
 		return payID;

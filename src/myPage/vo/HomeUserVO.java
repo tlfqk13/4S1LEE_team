@@ -12,6 +12,23 @@ public class HomeUserVO {
 	public HomeUserVO() {
 		
 	}
+	
+	
+
+
+	public HomeUserVO(String userID, String userPassword, String userEmail, String userPhone, String userName,
+			String userBirth, String userGrade) {
+		super();
+		this.userID = userID;
+		this.userPassword = userPassword;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.userName = userName;
+		this.userBirth = userBirth;
+		this.userGrade = userGrade;
+	}
+
+
 
 
 	public HomeUserVO(String userId, String userPassword, String userPhone, 
