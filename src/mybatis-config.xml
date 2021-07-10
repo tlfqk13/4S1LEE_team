@@ -14,6 +14,7 @@
 	<typeAlias type="myPage.vo.ShowRooomTypeVO" alias="ShowRooomType"/>
 	<typeAlias type="myPage.vo.UnBookingRoomVO" alias="UnBookingRoom"/>
 	<typeAlias type="myPage.vo.ReviewBoardVO" alias="ReviewBoard"/>
+	<typeAlias type="myPage.vo.UseableRoomListSrcVO" alias="UseableRoomListSrc"/>
 	<typeAlias type="admin.vo.AdminVO" alias="Admin"/>
 	<typeAlias type="hotel.vo.ReservationVO" alias="Reservation" />
 	<typeAlias type="hotel.vo.HotelInfoPrintVO" alias="hotelInfoPrint" />

@@ -6,7 +6,11 @@ public class UnBookingRoomVO {
 	public UnBookingRoomVO() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	public UnBookingRoomVO(int roomid) {
+		super();
+		this.roomid = roomid;
+	}
 	public int getRoomid() {
 		return roomid;
 	}

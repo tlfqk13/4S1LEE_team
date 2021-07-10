@@ -72,16 +72,6 @@ where
     and h.hotelname = #{hotelName}
 </select>
 
-<select id="showRoom" parameterType="String" resultType="UnBookingRoom">
-select 
-	r.roomId
-from 
-	room r, roomtype rt
-where 
-	r.roomtypeid = rt.roomtypeid
-	and rt.roomtypename = #{changedRoomType}
-	and r.BOOKINGSTATUS = 'unbooking'
-</select>
 
 <update id="reservationUpdateChangeRoomType" parameterType="Reservation">
 update Reservation 
@@ -94,8 +84,7 @@ where
 
 <!-- 회원 탈퇴 기능 -->
 <delete id="deleteAccount" parameterType="Homeuser" >
-   delete from 
-           UserPro
+   delete from HomeUser
    where
    		userID = #{userID}
 </delete>
@@ -131,6 +120,31 @@ set
 where
 	userPassword = #{userPassword}
 </update>
+
+<select id="reservationListAll" resultType="Reservation">
+select 
+	reservationID
+	,roomID
+	,userID
+	,CheckInDate
+	,CheckOutDate
+from 
+	reservation
+</select>
+
+
+<select id="useableRoom" parameterType="UseableRoomListSrc" resultType="UnBookingRoom">
+select 
+    roomid
+from 
+    roomtype rt, room r, hotel  h
+where 
+    r.hotelid = h.hotelid
+    and r.roomtypeid = rt.roomtypeid
+    and rt.roomtypename = #{roomTypename}
+    and h.hotelname = #{hotelName}
+Order by 1
+</select>
 
 
 </mapper>

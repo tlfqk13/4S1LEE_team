@@ -8,6 +8,7 @@ import myPage.vo.ReviewBoardVO;
 import myPage.vo.SearchHotelNameVO;
 import myPage.vo.ShowRooomTypeVO;
 import myPage.vo.UnBookingRoomVO;
+import myPage.vo.UseableRoomListSrcVO;
 import myPage.vo.HomeUserVO;
 
 public interface MyPageMapper {
@@ -23,8 +24,12 @@ public interface MyPageMapper {
 	public int reservationUpdateChangeRoomType(ReservationVO reservation);
 	
 	public List<ShowRooomTypeVO> showAvailableRoomByType(String hotelName);
+	public List<UnBookingRoomVO> useableRoom(UseableRoomListSrcVO roomlist);
+	
 	public SearchHotelNameVO searchHotelName(int roomID);
-	public List<UnBookingRoomVO> showRoom(String changedRoomType);
+	//public List<UnBookingRoomVO> showRoom(String changedRoomType);
+	public List<ReservationVO> reservationListAll();
+	
 	
 	public List<ReviewBoardVO> reviewList();
 }

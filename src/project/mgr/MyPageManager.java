@@ -9,6 +9,7 @@ import myPage.vo.ReviewBoardVO;
 import myPage.vo.SearchHotelNameVO;
 import myPage.vo.ShowRooomTypeVO;
 import myPage.vo.UnBookingRoomVO;
+import myPage.vo.UseableRoomListSrcVO;
 
 public class MyPageManager {
 	MyPageDAO myPagedao = new MyPageDAO();
@@ -38,10 +39,7 @@ public class MyPageManager {
 		List<ShowRooomTypeVO> list = myPagedao.showAvailableRoomByType(hotelName);
 		return list;
 	}
-	public List<UnBookingRoomVO> showRoom(String changedRoomType) {
-		List<UnBookingRoomVO> list = myPagedao.showRoom(changedRoomType);
-		return list;
-	}
+	
 	public int reservationUpdateChangeRoomType(ReservationVO update) {
 		int result = myPagedao.reservationUpdateChangeRoomType(update);
 		return result;
@@ -58,6 +56,15 @@ public class MyPageManager {
 	public List<ReviewBoardVO> reviewList(){
 		List<ReviewBoardVO> list1 = myPagedao.reviewList();
 		return list1;
+	}
+	public List<ReservationVO> reservationListAll() {
+		List<ReservationVO> list = myPagedao.reservationListAll();
+		return list;
+	}
+	public List<UnBookingRoomVO> useableRoom(UseableRoomListSrcVO roomListSrc) {
+		List<UnBookingRoomVO> list = myPagedao.useableRoom(roomListSrc);
+		
+		return list;
 	}
 
 }

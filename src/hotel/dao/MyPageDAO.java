@@ -11,6 +11,7 @@ import myPage.vo.ReviewBoardVO;
 import myPage.vo.SearchHotelNameVO;
 import myPage.vo.ShowRooomTypeVO;
 import myPage.vo.UnBookingRoomVO;
+import myPage.vo.UseableRoomListSrcVO;
 
 
 
@@ -70,13 +71,6 @@ public class MyPageDAO {
 		return list;
 	}
 
-	public List<UnBookingRoomVO> showRoom(String changedRoomType) {
-		SqlSession session = factory.openSession();
-		MyPageMapper mapper = session.getMapper(MyPageMapper.class);
-		
-		List<UnBookingRoomVO> list = mapper.showRoom(changedRoomType);
-		return list;
-	}
 
 	public int reservationUpdateChangeRoomType(ReservationVO update) {
 		SqlSession session = factory.openSession();
@@ -144,6 +138,24 @@ public class MyPageDAO {
 			}
 		}
 		return cnt;
+	}
+	
+	
+	public List<ReservationVO> reservationListAll() {
+		SqlSession session = factory.openSession();
+		MyPageMapper mapper = session.getMapper(MyPageMapper.class);
+		
+		List<ReservationVO> list = mapper.reservationListAll();
+		return list;
+	}
+
+	public List<UnBookingRoomVO> useableRoom(UseableRoomListSrcVO roomListSrc) {
+		SqlSession session = factory.openSession();
+		MyPageMapper mapper = session.getMapper(MyPageMapper.class);
+		
+		List<UnBookingRoomVO> list = mapper.useableRoom(roomListSrc);
+		session.commit();
+		return list;
 	}
 
 }
