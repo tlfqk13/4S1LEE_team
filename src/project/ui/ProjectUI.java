@@ -38,6 +38,7 @@ import project.mgr.signUpManager;
 //------------------------------------------------------------//
 // 현경 다시 돌아왔다 암 컴
 // 이거 바로 전 커밋 푸쉬,, 뭔가 이상함 
+// 이거 또 문제 생겼늬??
 
 public class ProjectUI {
 	public Scanner scannerInput = new Scanner(System.in);
