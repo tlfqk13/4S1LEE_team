@@ -1,6 +1,7 @@
 
 package hotel.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -29,13 +30,16 @@ public class loginDAO {
 		return result;
 	}
 
-	public HomeUserVO loginPasswordCheck(String userPassword) {
+	public HomeUserVO loginPasswordCheck(String userID, String userPassword) {
 		SqlSession session=null;
 		HomeUserVO result=null;
+		HashMap<String,String>map=new HashMap<>();
+		map.put("userID", userID);
+		map.put("userPassword", userPassword);
 		try {
 			session=factory.openSession();
 			loginMapper mapper=session.getMapper(loginMapper.class);
-			result=mapper.loginPasswordCheck(userPassword);
+			result=mapper.loginPasswordCheck(map);
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -46,3 +50,4 @@ public class loginDAO {
 	}
 
 }
+

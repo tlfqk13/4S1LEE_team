@@ -16,11 +16,14 @@ public class loginManager {
 		return result;
 	}
 
-	public HomeUserVO loginPasswordCheck(String userPassword) {
+	public HomeUserVO loginPasswordCheck(String userID, String userPassword) {
 		
-		HomeUserVO result=logindao.loginPasswordCheck(userPassword);
+		HomeUserVO result=logindao.loginPasswordCheck(userID,userPassword);
 		
 		return result;
 	}
 	
 }
+
+
+

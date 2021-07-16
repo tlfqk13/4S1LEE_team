@@ -1,5 +1,9 @@
 package admin.vo;
 
+import java.util.ArrayList;
+
+import hotel.vo.Reservation1VO;
+
 public class AdminManager {
 
 	adminDAO admindao=new adminDAO();

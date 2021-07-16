@@ -1,4 +1,7 @@
+
 package project.mgr;
+
+import java.util.ArrayList;
 
 import hotel.dao.signUpDAO;
 import hotel.dao.signUpMapper;
@@ -16,6 +19,11 @@ public class signUpManager {
 
 	public HomeUserVO idDoubleCheck(String userId) {
 		HomeUserVO result=signUpdao.idDoubleCheck(userId);
+		return result;
+	}
+
+	public ArrayList<HomeUserVO> UserTable() {
+		ArrayList<HomeUserVO> result=signUpdao.UserTable();
 		return result;
 	}
 }

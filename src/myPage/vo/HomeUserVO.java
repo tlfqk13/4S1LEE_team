@@ -40,6 +40,10 @@ public class HomeUserVO {
 		this.userName=userName;
 		this.userBirth=userBirth;
 	}
+	
+	public HomeUserVO(String usedId) {
+		this.userID=usedId;
+	}
 
 
 	public String getUserID() {

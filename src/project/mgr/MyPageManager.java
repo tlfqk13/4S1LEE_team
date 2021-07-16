@@ -66,5 +66,9 @@ public class MyPageManager {
 		
 		return list;
 	}
+	public int payDelete(int reservationID) {
+		int result = myPagedao.payDelete(reservationID);
+		return result;
+	}
 
 }

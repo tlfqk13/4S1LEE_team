@@ -11,6 +11,7 @@ import hotel.vo.HotelEventVO;
 import hotel.vo.HotelInfoGetVO;
 import hotel.vo.HotelInfoPrintVO;
 import hotel.vo.Reservation1VO;
+import hotel.vo.ReservationVO;
 
 
 
@@ -116,6 +117,24 @@ public class HotelDAO {
 				session.close();
 			}
 		} return cnt;
+
 	}
 
+
+	public void payUpdate(int reservationID) {
+		SqlSession session=null;
+
+		try {
+			session=factory.openSession();
+			HotelMapper mapper=session.getMapper(HotelMapper.class);
+			mapper.payUpdate(reservationID);
+			session.commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally
+		{
+			if(session != null) session.close();
+		}
+	}
 }
+

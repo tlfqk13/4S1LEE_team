@@ -4,10 +4,21 @@ public class Reservation1VO {
 	private String userID;
 	private int roomID;
 	
+	private String hotelName;
+	
 	private int reservationID;
 	private String checkInDate;
 	private String checkOutDate;
 	private int guestCount;
+	
+	private String payStatus;
+	private int payID;
+	private String payDay;
+	private String payType;
+	
+	private int price;
+	
+	private int userDiscount;
 	
 	public int getReservationID() {
 		return reservationID;
@@ -45,11 +56,48 @@ public class Reservation1VO {
 	public void setRoomID(int roomID) {
 		this.roomID = roomID;
 	}
-	@Override
-	public String toString() {
-		return "Reservation1VO [userID=" + userID + ", roomID=" + roomID + ", reservationID=" + reservationID
-				+ ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate + ", guestCount=" + guestCount
-				+ "]";
+
+	public String getPayStatus() {
+		return payStatus;
+	}
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
+	}
+	public int getPayID() {
+		return payID;
+	}
+	public void setPayID(int payID) {
+		this.payID = payID;
+	}
+	public String getPayDay() {
+		return payDay;
+	}
+	public void setPayDay(String payDay) {
+		this.payDay = payDay;
+	}
+	public String getPayType() {
+		return payType;
+	}
+	public void setPayType(String payType) {
+		this.payType = payType;
+	}
+	public String getHotelName() {
+		return hotelName;
+	}
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getUserDiscount() {
+		return userDiscount;
+	}
+	public void setUserDiscount(int userDiscount) {
+		this.userDiscount = userDiscount;
 	}
 
 }

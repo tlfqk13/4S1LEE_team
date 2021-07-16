@@ -15,6 +15,8 @@ select
 	,g.hotelGrade
 	,t.roomTypeName
 	,t.maxPeople
+	,r.roomID
+	,r.price
 from
 	hotel h, hotelGrade g, RoomType t, Room r
 where
@@ -37,7 +39,7 @@ select
 	,eventcontent
 	,startdate
 	,enddate
-	,discount
+	,eventdiscount
 from 
 	event
 where
@@ -72,15 +74,13 @@ select
 	,t.roomTypeName
     ,t.maxPeople
 from
-    hotel h, hotelGrade g, RoomType t, Room r, Reservation rv
+    hotel h, hotelGrade g, RoomType t, Room r
 where
     h.hotelGradeID=g.hotelgradeID
 and
     r.roomTypeID=t.roomTypeID
 and 
     h.hotelID = r.hotelID
-and 
-    r.roomid = rv.roomid
 and
     h.hotelName = #{hotelName}
 </select>
@@ -94,6 +94,8 @@ reservationID
 ,checkInDate
 ,checkOutDate
 ,guestCount
+,price
+,payStatus
 )values(
 reservation_seq.nextval
 ,#{roomID}
@@ -101,8 +103,55 @@ reservation_seq.nextval
 ,#{checkInDate}
 ,#{checkOutDate}
 ,#{guestCount}
+,30000
+,'결제대기'
 )
 </insert>
+
+<select id="reservation1voList" resultType="Reservation1vo">
+
+select 
+   r.reservationID
+   ,r.userID
+   ,u.userdiscount
+   ,h.hotelname
+   ,r.checkindate
+   ,r.checkoutdate
+   ,r.payStatus
+   ,m.price
+    
+from 
+   Reservation r, room m,hotel h, userGrade u, homeUser x
+where 
+    x.userID=#{userID} and m.roomID=r.roomID and m.hotelID=h.hotelID and u.userGradeID = x.userGradeID
+
+</select>
+
+<!-- 결제 테이블 입력 -->
+<insert id="payInsert" parameterType="pay">
+insert into pay(
+   payID
+   ,reservationID
+   ,payTypeID
+   ,payStatus
+)values(
+   pay_seq.nextval
+   ,#{reservationID}
+   ,#{payTypeID}
+   ,#{payStatus}
+   )
+</insert>
+
+<update id="payUpdate" parameterType="int">
+update reservation set payStatus='결제완료'
+where reservationID=#{reservationID}
+</update>
+
+<update id="payUpdate2" parameterType="int">
+update pay set payStatus='결제완료'
+where reservationID=#{reservationID}
+</update>
+
 
 
 </mapper>

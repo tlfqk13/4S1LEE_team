@@ -32,4 +32,5 @@ public interface MyPageMapper {
 	
 	
 	public List<ReviewBoardVO> reviewList();
+	public int payDelete(int reservationID);
 }
